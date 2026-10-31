@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Derivation | MRS 2026 NM05.09</title>
+<title>Derivation of Δf_el | MRS 2026 NM05.09</title>
+<meta name="description" content="Supplementary derivation for MRS 2026 Fall poster NM05.09: elastic driving force for grain-boundary migration in a cubic [001]-tilt bicrystal.">
 
 <!--
   ===== 수정 방법 =====
-  - 글: <p> ... </p> 안에 씁니다. 
-  - 인라인 수식: $...$        예) $c(x,t)$
-  - 번호 붙는 수식: \begin{equation} ... \end{equation}, \begin{align} ... \end{align}
-    (LaTeX에서 쓰던 그대로 붙여넣기. \label{...} / \eqref{...} 작동, 번호 없애려면 align* 또는 \notag)
-  - 주의: 수식 안의 부등호 < > 는 \lt , \gt 로 쓰세요 (HTML 태그로 오인됨).
-  - 자주 쓰는 매크로는 아래 macros 에 추가.
+  - 글: <p> ... </p> 안에 씁니다.
+  - 인라인 수식: $...$ / 번호 붙는 수식: \begin{equation} ... \end{equation}, \begin{align} ... \end{align}
+    (\label{...} / \eqref{...} 작동, 번호 없는 수식은 \[ ... \] 또는 \notag)
+  - 수식 안의 부등호는 \lt , \gt 로 쓰세요 (HTML 태그로 오인됨). 본문 글자의 < > 는 &lt; &gt;
+  - 최종식은 넓은 화면용(.only-wide)과 폰용(.only-narrow) 두 벌이 있습니다. 고칠 때 둘 다 고치세요.
 -->
 <script>
   window.MathJax = {
@@ -20,57 +20,89 @@
       inlineMath: [['$', '$'], ['\\(', '\\)']],
       tags: 'ams',
       macros: {
-        dd: '\\mathrm{d}'
+        fel: 'f_{\\mathrm{el}}',
+        dfel: '\\Delta f_{\\mathrm{el}}^{1\\to2}'
       }
-    }
+    },
+    chtml: { scale: window.matchMedia('(max-width: 380px)').matches ? 0.8 : window.matchMedia('(max-width: 600px)').matches ? 0.85 : 1 }  // smaller math on phones
   };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 
 <style>
   :root {
-    --accent: #683496;        /* poster theme purple */
-    --accent-light: #e6d7f4;  /* poster alert-block lavender */
+    --accent: #683496;
+    --accent-light: #e6d7f4;
+    --accent-soft: #f5effb;
     --text: #1d1d1f;
     --muted: #5f5f66;
+    --line: #e2e2e6;
     --bg: #ffffff;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font: 17px/1.62 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
-  header {
-    background: var(--accent);
-    color: #fff;
-    padding: 28px 16px 22px;
-  }
-  header .wrap, main, footer { max-width: 760px; margin: 0 auto; }
+  header { background: var(--accent); color: #fff; padding: 26px 16px 22px; }
+  .wrap { max-width: 780px; margin: 0 auto; }
   .venue { margin: 0 0 6px; font-size: 13px; letter-spacing: .02em; opacity: .85; }
   h1 { margin: 0 0 8px; font-size: 22px; line-height: 1.3; }
-  .authors { margin: 0; font-size: 14px; opacity: .9; }
-  main { padding: 8px 16px 32px; }
+  .authors { margin: 0; font-size: 14px; opacity: .92; }
+  main { max-width: 780px; margin: 0 auto; padding: 4px 16px 36px; }
+  .lede { color: var(--muted); font-size: 15px; margin: 18px 0 0; }
   h2 {
-    color: var(--accent);
-    font-size: 19px;
-    margin: 28px 0 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #ddd;
+    color: var(--accent); font-size: 20px; line-height: 1.3;
+    margin: 34px 0 10px; padding-bottom: 5px; border-bottom: 1px solid var(--line);
+    scroll-margin-top: 12px;
   }
+  h3 { font-size: 16px; margin: 22px 0 6px; scroll-margin-top: 12px; }
+  .num { display: inline-block; min-width: 1.6em; }
+  ul { padding-left: 1.2em; margin: 8px 0; }
+  li { margin: 4px 0; }
   .result {
-    background: var(--accent-light);
-    border-radius: 10px;
-    padding: 4px 16px 12px;
-    margin-top: 28px;
+    background: var(--accent-light); border-radius: 12px;
+    padding: 6px 16px 14px; margin-top: 20px;
   }
-  .result h2 { border-bottom-color: rgba(104, 52, 150, .25); }
-  .note { color: var(--muted); font-size: 14px; }
-  /* 넓은 수식은 폰에서 좌우 스크롤 */
+  .result h2 { margin-top: 14px; border-bottom-color: rgba(104, 52, 150, .25); }
+  .factors { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+  .factor { background: #fff; border-radius: 10px; padding: 10px 12px; font-size: 14.5px; line-height: 1.45; }
+  .factor b { color: var(--accent); }
+  nav.toc { margin: 22px 0 0; font-size: 14.5px; }
+  nav.toc ol { margin: 6px 0 0; padding-left: 1.4em; columns: 2; column-gap: 24px; }
+  nav.toc a { color: var(--accent); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+  .note { color: var(--muted); font-size: 14.5px; }
+  .callout { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 15px; }
+  figure { margin: 16px auto; max-width: 440px; text-align: center; }
+  figure svg { width: 100%; height: auto; display: block; }
+  figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; text-align: left; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; margin: 10px 0; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 6px; text-align: left; vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  td:last-child, th:last-child { white-space: nowrap; }
+  .small-math { font-size: 88%; }
+  .only-narrow { display: none; }
+  /* wide equations scroll sideways instead of breaking the page */
   mjx-container[jax="CHTML"][display="true"] { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
-  footer { padding: 16px; border-top: 1px solid #eee; color: var(--muted); font-size: 13px; }
+  footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; padding: 14px 16px 24px; }
   footer a { color: var(--accent); }
+  @media (max-width: 820px) {
+    .only-wide { display: none; }
+    .only-narrow { display: block; }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    h1 { font-size: 20px; }
+    nav.toc ol { columns: 1; }
+    .small-math { font-size: 78%; }
+  }
+  @media (max-width: 380px) {
+    .small-math { font-size: 70%; }
+  }
 </style>
 </head>
 <body>
@@ -84,34 +116,446 @@
 </header>
 
 <main>
-  <p class="note">Supplementary derivation for the poster. (아래는 형식 예시입니다. 실제 유도 과정으로 바꿔 넣으세요.)</p>
+  <p class="lede">Supplementary derivation. The elastic driving force for grain-boundary (GB) migration in a cubic [001]-tilt bicrystal: the elastic energy per unit volume released when a point turns from grain&nbsp;1 into grain&nbsp;2 at fixed strain.</p>
 
-  <h2>1. Governing equation</h2>
-  <p>For a concentration-dependent diffusivity $D(c)$ in one dimension,</p>
-  \begin{equation}
-    \frac{\partial c}{\partial t} = \frac{\partial}{\partial x}\left( D(c)\,\frac{\partial c}{\partial x} \right).
-    \label{eq:fick}
-  \end{equation}
+  <section class="result" id="result">
+    <h2>Result</h2>
+    <div class="only-wide">
+    \[
+      \boxed{\;\dfel=\left[\frac{C_{11}^f-C_{12}^f-2C_{44}^f}{4}\right]\big(\Delta\varepsilon^2+\gamma^2\big)\,\big[\sin2\Delta_\theta\big]\left[\sin2\!\left(\Sigma_\theta-\arctan\frac{\gamma}{\Delta\varepsilon}\right)\right]\;}
+    \]
+    </div>
+    <div class="only-narrow">
+    \[
+      \boxed{\begin{aligned}
+        \dfel&=\left[\frac{C_{11}^f-C_{12}^f-2C_{44}^f}{4}\right]\\
+        &\quad\times\big(\Delta\varepsilon^2+\gamma^2\big)\,\big[\sin2\Delta_\theta\big]\\
+        &\quad\times\left[\sin2\!\left(\Sigma_\theta-\arctan\frac{\gamma}{\Delta\varepsilon}\right)\right]
+      \end{aligned}}
+    \]
+    </div>
+    <ul>
+      <li>$\Delta_\theta\equiv\theta_2-\theta_1$, $\Sigma_\theta\equiv\theta_1+\theta_2$; $\theta_i$ is the angle from the lab $x$ axis to the [100] axis of grain $i$ (counter-clockwise).</li>
+      <li>$\Delta\varepsilon\equiv\varepsilon_{xx}-\varepsilon_{yy}$, $\gamma\equiv\gamma_{xy}=2\varepsilon_{xy}$: lab-frame strains, GB normal along $x$.</li>
+      <li>$\dfel&gt;0$: the GB moves into grain&nbsp;1 (grain&nbsp;2 grows).</li>
+    </ul>
+    <div class="factors">
+      <div class="factor"><b>$\Delta\varepsilon^2+\gamma^2=\rho^2$</b><br>Strain magnitude: $\ge 0$ and the same in every frame.</div>
+      <div class="factor"><b>$\sin2\Delta_\theta$</b><br>Misorientation: $&gt;0$ for $0^\circ&lt;\Delta_\theta&lt;90^\circ$; sets the size.</div>
+      <div class="factor"><b>$\sin2\big(\Sigma_\theta-\arctan\frac{\gamma}{\Delta\varepsilon}\big)$</b><br>Sign: orientation of the grain pair against the strain direction.</div>
+    </div>
+  </section>
 
-  <h2>2. Boltzmann transformation</h2>
-  <p>With $\eta = x/\sqrt{t}$ and $c(x,t) = c(\eta)$, the two sides of Eq.&nbsp;\eqref{eq:fick} become</p>
+  <nav class="toc" aria-label="Contents">
+    <b>Derivation</b>
+    <ol>
+      <li><a href="#setup">Setup and notation</a></li>
+      <li><a href="#c0">Stiffness at θ = 0°</a></li>
+      <li><a href="#ctheta">Rotation about [001]</a></li>
+      <li><a href="#def">Definition of Δf<sub>el</sub></a></li>
+      <li><a href="#general">Any θ<sub>1</sub>, θ<sub>2</sub></a></li>
+      <li><a href="#beta">β-rotated frame</a></li>
+      <li><a href="#psi">Back to lab-frame strains</a></li>
+      <li><a href="#meaning">Interpretation</a></li>
+      <li><a href="#check">Numerical check</a></li>
+      <li><a href="#appendix">Appendices, references</a></li>
+    </ol>
+  </nav>
+
+  <!-- ===================================================== 1 -->
+  <h2 id="setup"><span class="num">1.</span>Setup and notation</h2>
+  <ul>
+    <li>Two-dimensional plane strain. The tilt axis is $z\parallel[001]$; the GB normal is $x$.</li>
+    <li>$\theta_i$: counter-clockwise angle from the lab $x$ axis to the [100] axis of grain $i$.</li>
+    <li>Rotation convention: $a=R_z(\theta)$ is the active rotation from crystal to lab axes; $\theta=0$ gives $a=I$.
+      (In MOOSE this is <code>euler_angle_1 = −θ</code>.)</li>
+  </ul>
   \begin{align}
-    \frac{\partial c}{\partial t} &= -\frac{\eta}{2t}\,\frac{\dd c}{\dd \eta}, \label{eq:lhs}\\
-    \frac{\partial}{\partial x}\left( D\,\frac{\partial c}{\partial x} \right) &= \frac{1}{t}\,\frac{\dd}{\dd \eta}\left( D\,\frac{\dd c}{\dd \eta} \right). \label{eq:rhs}
+    C_{ijkl}(\theta)&=a_{ip}\,a_{jq}\,a_{kr}\,a_{ls}\,C_{pqrs}(0^\circ), \label{eq:rot}\\
+    a=R_z(\theta)&=\begin{pmatrix}\cos\theta&-\sin\theta&0\\ \sin\theta&\cos\theta&0\\ 0&0&1\end{pmatrix}. \notag
+  \end{align}
+  <ul>
+    <li>Strains: $\varepsilon_m=(\varepsilon_{xx}+\varepsilon_{yy})/2$, $\Delta\varepsilon\equiv\varepsilon_{xx}-\varepsilon_{yy}$, $\gamma\equiv\gamma_{xy}=2\varepsilon_{xy}$ (engineering shear), $\varepsilon_{xz}=\varepsilon_{yz}=0$.</li>
+    <li>Anisotropy: $H\equiv C_{11}-C_{12}-2C_{44}$. Fluorite: $C_{11}=3288.4$, $C_{12}=587.8$, $C_{44}=390.6$ eV/nm³ (526.8, 94.2, 62.6 GPa), so $H=1919.4$ eV/nm³ $&gt;0$ and the Zener ratio is $A=2C_{44}/(C_{11}-C_{12})=0.29$.</li>
+    <li>The superscript $f$ (fluorite) is dropped below: $C_{11}\equiv C_{11}^f$, etc. The prefactor of the result is $H/4$.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 320 236" role="img" aria-label="Bicrystal geometry: grain 1 on the left, grain 2 on the right, GB normal along x">
+      <defs>
+        <marker id="ahk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+        <marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f6f4f"/></marker>
+        <marker id="ahp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#683496"/></marker>
+      </defs>
+      <rect x="10" y="10" width="145" height="140" fill="#dbe7f7" stroke="#9fb6d8"/>
+      <rect x="165" y="10" width="145" height="140" fill="#f9e0d6" stroke="#e2b4a3"/>
+      <rect x="155" y="10" width="10" height="140" fill="#3fa67a"/>
+      <text x="18" y="29" font-size="13" font-weight="600" fill="#1d1d1f">grain 1 (θ₁)</text>
+      <text x="173" y="29" font-size="13" font-weight="600" fill="#1d1d1f">grain 2 (θ₂)</text>
+      <!-- grain 1 crystal axes, theta1 = 0 -->
+      <rect x="62" y="68" width="40" height="40" fill="none" stroke="#333" stroke-width="1.4"/>
+      <line x1="82" y1="88" x2="120" y2="88" stroke="#333" stroke-width="1.6" marker-end="url(#ahk)"/>
+      <text x="113" y="80" font-size="11" fill="#333">[100]</text>
+      <!-- grain 2 crystal axes, theta2 = 30 deg -->
+      <line x1="238" y1="88" x2="290" y2="88" stroke="#888" stroke-dasharray="3 3"/>
+      <rect x="218" y="68" width="40" height="40" fill="none" stroke="#333" stroke-width="1.4" transform="rotate(-30 238 88)"/>
+      <line x1="238" y1="88" x2="270.9" y2="69" stroke="#333" stroke-width="1.6" marker-end="url(#ahk)"/>
+      <text x="262" y="60" font-size="11" fill="#333">[100]</text>
+      <path d="M262,88 A24,24 0 0 0 258.8,76" fill="none" stroke="#683496" stroke-width="1.4"/>
+      <text x="276" y="85" font-size="12" font-style="italic" font-family="Times New Roman, serif" fill="#683496">θ₂</text>
+      <!-- GB normal -->
+      <line x1="138" y1="132" x2="186" y2="132" stroke="#1f6f4f" stroke-width="1.6" marker-end="url(#ahg)"/>
+      <text x="170" y="125" font-size="11" fill="#1f6f4f">n ∥ x</text>
+      <!-- GB motion -->
+      <line x1="160" y1="166" x2="112" y2="166" stroke="#683496" stroke-width="2" marker-end="url(#ahp)"/>
+      <text x="160" y="186" font-size="11" text-anchor="middle" fill="#683496">Δf &gt; 0: GB moves into grain 1 (grain 2 grows)</text>
+      <!-- lab axes -->
+      <line x1="24" y1="222" x2="60" y2="222" stroke="#333" stroke-width="1.3" marker-end="url(#ahk)"/>
+      <line x1="24" y1="222" x2="24" y2="196" stroke="#333" stroke-width="1.3" marker-end="url(#ahk)"/>
+      <circle cx="24" cy="222" r="3.6" fill="none" stroke="#333" stroke-width="1.2"/>
+      <circle cx="24" cy="222" r="1.1" fill="#333"/>
+      <text x="64" y="226" font-size="12" font-style="italic" font-family="Times New Roman, serif">x</text>
+      <text x="28" y="198" font-size="12" font-style="italic" font-family="Times New Roman, serif">y</text>
+      <text x="80" y="226" font-size="11" fill="#5f5f66">z ∥ [001]: tilt axis (out of page)</text>
+    </svg>
+    <figcaption>Fig.&nbsp;1. Geometry. Squares: cube axes of each grain (here θ<sub>1</sub>&nbsp;=&nbsp;0°, θ<sub>2</sub>&nbsp;=&nbsp;30°); green band: GB.</figcaption>
+  </figure>
+
+  <!-- ===================================================== 2 -->
+  <h2 id="c0"><span class="num">2.</span>Stiffness of a grain at θ = 0°</h2>
+  <p>At $\theta=0^\circ$ the cube axes lie along $x,y,z$, so the stiffness has the plain cubic form (Voigt order 11, 22, 33, 23, 13, 12):</p>
+  <div class="small-math">
+  \[
+    C(0^\circ)=\begin{pmatrix}
+      C_{11}&C_{12}&C_{12}&0&0&0\\
+      C_{12}&C_{11}&C_{12}&0&0&0\\
+      C_{12}&C_{12}&C_{11}&0&0&0\\
+      0&0&0&C_{44}&0&0\\
+      0&0&0&0&C_{44}&0\\
+      0&0&0&0&0&C_{44}
+    \end{pmatrix}
+  \]
+  </div>
+
+  <!-- ===================================================== 3 -->
+  <h2 id="ctheta"><span class="num">3.</span>Rotation about [001]: C(θ)</h2>
+  <p>A rotation about [001] changes only the in-plane entries. Each changed entry is its $\theta=0$ value plus or minus $\tfrac H2\sin^2 2\theta$ or $\tfrac H4\sin4\theta$:</p>
+  \begin{align}
+    C_{1111}=C_{2222}&=C_{11}-\tfrac{H}{2}\sin^2 2\theta, \notag\\
+    C_{1122}&=C_{12}+\tfrac{H}{2}\sin^2 2\theta, \notag\\
+    C_{1212}&=C_{44}+\tfrac{H}{2}\sin^2 2\theta, \notag\\
+    C_{1112}=-C_{2212}&=\tfrac{H}{4}\sin 4\theta,
+    \label{eq:Ctheta}
+  \end{align}
+  <p>while $C_{1133}=C_{2233}=C_{12}$, $C_{3333}=C_{11}$ and $C_{2323}=C_{1313}=C_{44}$ are unchanged. With $s\equiv\sin^2 2\theta$ and $q\equiv\sin 4\theta$:</p>
+  <div class="small-math">
+  \[
+    C(\theta)=\begin{pmatrix}
+      C_{11}-\frac H2 s&C_{12}+\frac H2 s&C_{12}&0&0&\frac H4 q\\
+      C_{12}+\frac H2 s&C_{11}-\frac H2 s&C_{12}&0&0&-\frac H4 q\\
+      C_{12}&C_{12}&C_{11}&0&0&0\\
+      0&0&0&C_{44}&0&0\\
+      0&0&0&0&C_{44}&0\\
+      \frac H4 q&-\frac H4 q&0&0&0&C_{44}+\frac H2 s
+    \end{pmatrix}
+  \]
+  </div>
+  <ul>
+    <li>From $0^\circ$ to $45^\circ$, $C_{1111}$ falls, $C_{1122}$ and $C_{1212}$ rise, and $C_{1112}$ is non-zero only in between.</li>
+    <li>This closed form matches the stiffness used in the MOOSE runs ($\theta$ = 0, 5, 10, 15, 20, 30, 45°) to within $2\times10^{-12}$ eV/nm³.</li>
+  </ul>
+
+  <!-- ===================================================== 4 -->
+  <h2 id="def"><span class="num">4.</span>Definition of Δf<sub>el</sub><sup>1→2</sup></h2>
+  \begin{align}
+    \fel(\theta)&=\tfrac12\,\varepsilon_{ij}\,C_{ijkl}(\theta)\,\varepsilon_{kl}, \notag\\
+    \dfel(\mathbf r)&\equiv \fel\big(\theta_1;\varepsilon(\mathbf r),c(\mathbf r)\big) \notag\\
+    &\quad-\fel\big(\theta_2;\varepsilon(\mathbf r),c(\mathbf r)\big).
+    \label{eq:def}
+  \end{align}
+  <ul>
+    <li>At the same point $\mathbf r$ both grains carry the same strain $\varepsilon$ and Gd concentration $c$; only the stiffness differs (Voigt interpolation, isostrain).</li>
+    <li>Meaning: the elastic energy per unit volume a point would release if it turned from grain 1 into grain 2 while keeping its strain.</li>
+    <li>Sign: $\dfel&gt;0$ moves the GB into grain 1, so grain 2 grows; $\dfel&lt;0$ does the opposite.</li>
+  </ul>
+  <p>Example, $\theta_1=0^\circ$ and $\theta_2=45^\circ$: the two shear stiffnesses swap.</p>
+  \begin{align}
+    \dfel
+    &=\Big(\tfrac12\,\tfrac{C_{11}-C_{12}}{2}\,\Delta\varepsilon^2+\tfrac12\,C_{44}\,\gamma^2\Big) \notag\\
+    &\quad-\Big(\tfrac12\,C_{44}\,\Delta\varepsilon^2+\tfrac12\,\tfrac{C_{11}-C_{12}}{2}\,\gamma^2\Big) \notag\\
+    &=\frac{H}{4}\,\big(\Delta\varepsilon^2-\gamma^2\big).
+    \label{eq:045}
+  \end{align}
+  <p class="note">The first bracket is grain 1, the second grain 2. How this local definition relates to the exact (Eshelby) driving force on a sharp interface is summarized in <a href="#appA">Appendix A</a>.</p>
+
+  <!-- ===================================================== 5 -->
+  <h2 id="general"><span class="num">5.</span>Any θ<sub>1</sub>, θ<sub>2</sub></h2>
+  <h3>5.1 Expanding f<sub>el</sub>(θ)</h3>
+  <p>With $\varepsilon_{xz}=\varepsilon_{yz}=0$ and the symmetries in \eqref{eq:Ctheta},</p>
+  \[
+    \begin{aligned}
+      \fel(\theta)&=\tfrac12\Big[C_{1111}\big(\varepsilon_{xx}^2+\varepsilon_{yy}^2\big)+2C_{1122}\,\varepsilon_{xx}\varepsilon_{yy}\\
+      &\qquad+4C_{1212}\,\varepsilon_{xy}^2+4C_{1112}\,\varepsilon_{xy}\,\Delta\varepsilon\Big]\\
+      &\quad+2C_{12}\,\varepsilon_m\varepsilon_{zz}+\tfrac12 C_{11}\,\varepsilon_{zz}^2 .
+    \end{aligned}
+  \]
+  <p>The $\tfrac H2\sin^2 2\theta$ parts of $C_{1111}$, $C_{1122}$, $C_{1212}$ enter with signs $(-,+,+)$ and combine into $-(\varepsilon_{xx}-\varepsilon_{yy})^2+(2\varepsilon_{xy})^2=-(\Delta\varepsilon^2-\gamma^2)$; the $C_{1112}$ term is $2C_{1112}\,\varepsilon_{xy}\Delta\varepsilon=C_{1112}\,\gamma\,\Delta\varepsilon$. Hence</p>
+  \begin{align}
+    \fel(\theta)&=\fel(0^\circ)-\frac H4\sin^2 2\theta\,\big(\Delta\varepsilon^2-\gamma^2\big) \notag\\
+    &\quad+\frac H4\sin 4\theta\;\gamma\,\Delta\varepsilon,
+    \label{eq:fexp}
+  \end{align}
+  \[
+    \begin{aligned}
+      \fel(0^\circ)&=(C_{11}+C_{12})\,\varepsilon_m^2+\tfrac14(C_{11}-C_{12})\,\Delta\varepsilon^2\\
+      &\quad+\tfrac12 C_{44}\,\gamma^2+2C_{12}\,\varepsilon_m\varepsilon_{zz}+\tfrac12 C_{11}\,\varepsilon_{zz}^2 .
+    \end{aligned}
+  \]
+
+  <h3>5.2 Taking the difference</h3>
+  <p>$\fel(0^\circ)$ does not depend on $\theta$, so it cancels, together with every $(\varepsilon_{xx}+\varepsilon_{yy})^2$ and $\varepsilon_{zz}$ term:</p>
+  \[
+    \begin{aligned}
+      \dfel=\frac12\Big[\frac H2\Big]\Big\{&\big[\sin^2 2\theta_2-\sin^2 2\theta_1\big]\\
+      &\quad\times\big(\Delta\varepsilon^2-\gamma^2\big)\\
+      &+\big[\sin 4\theta_1-\sin 4\theta_2\big]\,\gamma\,\Delta\varepsilon\Big\}.
+    \end{aligned}
+  \]
+
+  <h3>5.3 Collecting with trigonometric identities</h3>
+  \[
+    \begin{gathered}
+      \sin^2 A-\sin^2 B=\sin(A+B)\,\sin(A-B),\\
+      \sin A-\sin B=2\cos\tfrac{A+B}{2}\,\sin\tfrac{A-B}{2},
+    \end{gathered}
+  \]
+  \[
+    \begin{gathered}
+      \sin^2 2\theta_2-\sin^2 2\theta_1=\sin 2\Sigma_\theta\,\sin 2\Delta_\theta,\\
+      \sin 4\theta_1-\sin 4\theta_2=-2\cos 2\Sigma_\theta\,\sin 2\Delta_\theta .
+    \end{gathered}
+  \]
+  \begin{align}
+    \dfel=\frac H4\sin 2\Delta_\theta\,\Big[&\sin 2\Sigma_\theta\,\big(\Delta\varepsilon^2-\gamma^2\big) \notag\\
+    &-2\cos 2\Sigma_\theta\,\gamma\,\Delta\varepsilon\Big]
+    \label{eq:general}
+  \end{align}
+  <ul>
+    <li>$\theta_1=0^\circ$, $\theta_2=45^\circ$ gives back \eqref{eq:045}.</li>
+    <li>$\theta_1=-\theta_2$ ($\Sigma_\theta=0$) gives $-\tfrac H2\sin 2\Delta_\theta\,\gamma\,\Delta\varepsilon$, the same form as the symmetric-boundary expression of Schönfelder et&nbsp;al. (1997), $f(\theta_2)-f(\theta_1)=c_A\sin 2\Delta_\theta\,\varepsilon_{xy}(\varepsilon_{yy}-\varepsilon_{xx})$ with $c_A\equiv 2C_{44}-(C_{11}-C_{12})=-H$.</li>
+  </ul>
+
+  <!-- ===================================================== 6 -->
+  <h2 id="beta"><span class="num">6.</span>The β-rotated frame</h2>
+  <p>Turning the strain axes by $\beta$ removes the cross term $\gamma\,\Delta\varepsilon$:</p>
+  \[
+    \beta\equiv\frac{\theta_1+\theta_2}{2}-\frac\pi8
+    \quad\Rightarrow\quad
+    4\beta=2\Sigma_\theta-\frac\pi2,
+  \]
+  \[
+    \sin 2\Sigma_\theta=\cos 4\beta,\qquad
+    -\cos 2\Sigma_\theta=\sin 4\beta .
+  \]
+  <p>The same strain in axes turned by $+\beta$ (passive rotation):</p>
+  \[
+    \begin{aligned}
+      \Delta\varepsilon'&=\Delta\varepsilon\cos 2\beta+\gamma\sin 2\beta,\\
+      \gamma'&=\gamma\cos 2\beta-\Delta\varepsilon\sin 2\beta .
+    \end{aligned}
+  \]
+  <p>With $\cos^2x-\sin^2x=\cos 2x$ and $2\sin x\cos x=\sin 2x$,</p>
+  \[
+    \begin{aligned}
+      \Delta\varepsilon'^2-\gamma'^2&=\big(\Delta\varepsilon^2-\gamma^2\big)\cos 4\beta\\
+      &\quad+2\gamma\,\Delta\varepsilon\,\sin 4\beta ,
+    \end{aligned}
+  \]
+  <p>which is exactly the bracket in \eqref{eq:general}. Therefore</p>
+  \begin{equation}
+    \boxed{\;\dfel=\frac H4\sin 2\Delta_\theta\,\big(\Delta\varepsilon'^2-\gamma'^2\big)\;}
+    \label{eq:beta}
+  \end{equation}
+  <ul>
+    <li>In the $\beta$ frame the sign of $\dfel$ is decided only by comparing $|\Delta\varepsilon'|$ with $|\gamma'|$.</li>
+    <li>$\beta$ is fixed only up to $90^\circ$; using $\beta+45^\circ$ flips the sign of the bracket, so the definition above must be kept.</li>
+  </ul>
+
+  <!-- ===================================================== 7 -->
+  <h2 id="psi"><span class="num">7.</span>Back to lab-frame strains</h2>
+  <h3>7.1 The strain as one complex number</h3>
+  \[
+    \begin{aligned}
+      \zeta&\equiv\Delta\varepsilon+i\gamma=\rho\,e^{i2\alpha},\\
+      \rho^2&=\Delta\varepsilon^2+\gamma^2,\qquad \tan 2\alpha=\frac{\gamma}{\Delta\varepsilon}
+    \end{aligned}
+  \]
+  <ul>
+    <li>$\rho$ is the diameter of the strain Mohr circle ($\varepsilon_{\mathrm I}-\varepsilon_{\mathrm{II}}$) and is the same in every frame.</li>
+    <li>$\alpha$ is the direction of maximum stretch, measured from $x$. The angle is doubled because a strain is unchanged when the axes turn by $180^\circ$.</li>
+  </ul>
+  <p>The two rotation formulas of Section 6 are one complex multiplication:</p>
+  \[
+    \begin{aligned}
+      \zeta'&\equiv\Delta\varepsilon'+i\gamma'=\zeta\,e^{-i2\beta}\\
+      &=(\Delta\varepsilon+i\gamma)(\cos 2\beta-i\sin 2\beta)\\
+      &=\underbrace{(\Delta\varepsilon\cos 2\beta+\gamma\sin 2\beta)}_{\Delta\varepsilon'}\\
+      &\quad+i\,\underbrace{(\gamma\cos 2\beta-\Delta\varepsilon\sin 2\beta)}_{\gamma'}
+    \end{aligned}
+  \]
+  \begin{align}
+    \zeta'&=\rho\,e^{i2\alpha}e^{-i2\beta}=\rho\,e^{i\psi}, \notag\\
+    \psi&\equiv 2\alpha-2\beta, \notag\\
+    \Rightarrow\quad \Delta\varepsilon'&=\rho\cos\psi,\qquad \gamma'=\rho\sin\psi .
+    \label{eq:psi}
   \end{align}
 
-  <section class="result">
-    <h2>Result</h2>
-    <p>Equating \eqref{eq:lhs} and \eqref{eq:rhs} gives the ordinary differential equation</p>
-    \begin{equation}
-      -\frac{\eta}{2}\,\frac{\dd c}{\dd \eta} = \frac{\dd}{\dd \eta}\left( D(c)\,\frac{\dd c}{\dd \eta} \right).
-      \label{eq:ode}
-    \end{equation}
-  </section>
+  <figure>
+    <svg viewBox="0 0 320 252" role="img" aria-label="Complex plane: zeta at angle 2 alpha is rotated by minus 2 beta to zeta prime at angle psi">
+      <defs>
+        <marker id="ahk2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+        <marker id="ahp2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#683496"/></marker>
+      </defs>
+      <!-- axes -->
+      <line x1="28" y1="225" x2="300" y2="225" stroke="#333" stroke-width="1.3" marker-end="url(#ahk2)"/>
+      <line x1="40" y1="236" x2="40" y2="18" stroke="#333" stroke-width="1.3" marker-end="url(#ahk2)"/>
+      <text x="302" y="229" font-size="12" font-family="Times New Roman, serif">Re</text>
+      <text x="46" y="24" font-size="12" font-family="Times New Roman, serif">Im</text>
+      <!-- circle |zeta| = rho -->
+      <path d="M215,225 A175,175 0 0 0 40,50" fill="none" stroke="#b5b5bb" stroke-width="1.3"/>
+      <text x="218" y="203" font-size="12" font-style="italic" font-family="Times New Roman, serif" fill="#7a7a80">|ζ| = ρ</text>
+      <!-- zeta (before) -->
+      <line x1="40" y1="225" x2="114" y2="66.4" stroke="#555" stroke-width="1.3" stroke-dasharray="4 3"/>
+      <circle cx="114" cy="66.4" r="4" fill="#333"/>
+      <text x="104" y="62" font-size="14" text-anchor="end" font-style="italic" font-family="Times New Roman, serif">ζ</text>
+      <path d="M76,225 A36,36 0 0 0 55.2,192.4" fill="none" stroke="#333" stroke-width="1.1"/>
+      <text x="70" y="199" font-size="12" font-style="italic" font-family="Times New Roman, serif">2α</text>
+      <!-- rotation arrow -2 beta -->
+      <path d="M136,58.7 A192,192 0 0 1 206.3,129" fill="none" stroke="#683496" stroke-width="1.8" marker-end="url(#ahp2)"/>
+      <text x="190" y="80" font-size="13" font-style="italic" font-family="Times New Roman, serif" fill="#683496">−2β</text>
+      <!-- zeta' (after) -->
+      <line x1="40" y1="225" x2="198.6" y2="151" stroke="#683496" stroke-width="2.2"/>
+      <circle cx="198.6" cy="151" r="4.2" fill="#683496"/>
+      <text x="205" y="168" font-size="13" font-style="italic" font-family="Times New Roman, serif" fill="#683496">ζ′ = ρ e<tspan dy="-5" font-size="9">iψ</tspan></text>
+      <text x="124" y="177" font-size="13" font-style="italic" font-family="Times New Roman, serif" fill="#683496">ρ</text>
+      <path d="M110,225 A70,70 0 0 0 103.4,195.4" fill="none" stroke="#683496" stroke-width="1.3"/>
+      <text x="115" y="214" font-size="12" font-style="italic" font-family="Times New Roman, serif" fill="#683496">ψ</text>
+      <!-- projections -->
+      <line x1="198.6" y1="151" x2="198.6" y2="225" stroke="#683496" stroke-dasharray="3 3"/>
+      <line x1="198.6" y1="151" x2="40" y2="151" stroke="#683496" stroke-dasharray="3 3"/>
+      <text x="198.6" y="243" font-size="12" text-anchor="middle" font-style="italic" font-family="Times New Roman, serif" fill="#683496">Δε′ = ρ cos ψ</text>
+      <text x="35" y="155" font-size="12" text-anchor="end" font-style="italic" font-family="Times New Roman, serif" fill="#683496">γ′</text>
+    </svg>
+    <figcaption>Fig.&nbsp;2. The strain $\zeta=\Delta\varepsilon+i\gamma$ as a point at distance $\rho$ and angle $2\alpha$. Turning the axes by $+\beta$ moves it clockwise by $2\beta$ along the circle, to the angle $\psi$; its length $\rho$ is unchanged ($\Delta\varepsilon'^2+\gamma'^2=\rho^2$).</figcaption>
+  </figure>
+
+  <h3>7.2 Double-angle formula, then β and α</h3>
+  \begin{align}
+    \Delta\varepsilon'^2-\gamma'^2
+    &=\rho^2\cos^2\psi-\rho^2\sin^2\psi \notag\\
+    &=\rho^2\cos 2\psi \notag\\
+    &=\big(\Delta\varepsilon^2+\gamma^2\big)\cos(4\alpha-4\beta).
+    \label{eq:cos}
+  \end{align}
+  <p>The magnitude $\Delta\varepsilon^2+\gamma^2$ is frame-independent and comes out as a prefactor; all orientation dependence sits in the angle $4\alpha-4\beta$. Insert $4\beta=2(\theta_1+\theta_2)-\pi/2$ (the grain pair) and $4\alpha=2\arctan(\gamma/\Delta\varepsilon)$ (the strain direction), and use $\cos(x+\pi/2)=-\sin x$:</p>
+  \[
+    \begin{aligned}
+      \cos(4\alpha-4\beta)&=\cos\!\Big(4\alpha-2(\theta_1+\theta_2)+\frac\pi2\Big)\\
+      &=\sin\!\big(2(\theta_1+\theta_2)-4\alpha\big),
+    \end{aligned}
+  \]
+  \begin{align}
+    \Delta\varepsilon'^2-\gamma'^2&=\big(\Delta\varepsilon^2+\gamma^2\big) \notag\\
+    &\quad\times\sin\!\Big(2\Sigma_\theta-2\arctan\frac{\gamma}{\Delta\varepsilon}\Big).
+    \label{eq:bracket}
+  \end{align}
+  <p class="callout"><b>arctan vs atan2.</b> The polar form needs $2\alpha=\operatorname{atan2}(\gamma,\Delta\varepsilon)$. For $\Delta\varepsilon&lt;0$, $\arctan(\gamma/\Delta\varepsilon)$ differs from $2\alpha$ by $\pi$; only twice this angle enters, so the difference is $2\pi$ and the sine is unchanged. In code, $\operatorname{atan2}(\gamma,\Delta\varepsilon)$ also covers $\Delta\varepsilon=0$.</p>
+
+  <h3 id="final">7.3 Result</h3>
+  <p>Putting \eqref{eq:bracket} into \eqref{eq:beta}:</p>
+  <div class="only-wide">
+  \[
+    \boxed{\;\dfel=\left[\frac{C_{11}^f-C_{12}^f-2C_{44}^f}{4}\right]\big(\Delta\varepsilon^2+\gamma^2\big)\,\big[\sin 2\Delta_\theta\big]\left[\sin 2\!\left(\Sigma_\theta-\arctan\frac{\gamma}{\Delta\varepsilon}\right)\right]\;}
+  \]
+  </div>
+  <div class="only-narrow">
+  \[
+    \boxed{\begin{aligned}
+      \dfel&=\left[\frac{C_{11}^f-C_{12}^f-2C_{44}^f}{4}\right]\\
+      &\quad\times\big(\Delta\varepsilon^2+\gamma^2\big)\,\big[\sin2\Delta_\theta\big]\\
+      &\quad\times\left[\sin2\!\left(\Sigma_\theta-\arctan\frac{\gamma}{\Delta\varepsilon}\right)\right]
+    \end{aligned}}
+  \]
+  </div>
+  <p>In polar form, $\dfel=\tfrac H4\,\rho^2\sin 2\Delta_\theta\,\sin(2\Sigma_\theta-4\alpha)$.</p>
+
+  <!-- ===================================================== 8 -->
+  <h2 id="meaning"><span class="num">8.</span>Interpretation</h2>
+  <ul>
+    <li><b>Three factors.</b> $\rho^2=\Delta\varepsilon^2+\gamma^2$ is the strain magnitude ($\ge0$, frame-independent); $\sin 2\Delta_\theta$ is the misorientation factor ($&gt;0$ for $0^\circ&lt;\Delta_\theta&lt;90^\circ$) and sets the size; $\sin 2(\Sigma_\theta-\arctan(\gamma/\Delta\varepsilon))$ sets the sign by comparing the grain-pair orientation $\Sigma_\theta$ with the strain direction $\alpha$.</li>
+    <li><b>Physical picture.</b> In crystal axes, $\fel(\theta)=f_{\mathrm{iso}}+\frac H8\rho^2\cos 4(\alpha-\theta)$ (<a href="#appB">Appendix B</a>). For $H&gt;0$ the energy is lowest at $\theta=\alpha-45^\circ$ (mod $90^\circ$), where an in-plane $\langle110\rangle$ axis, the compliant in-plane direction, points along the maximum stretch. Of the two grains, the one closer to this orientation grows.</li>
+    <li><b>Reversal.</b> $\dfel=0$ when $2\Sigma_\theta-4\alpha=n\pi$, i.e. $\Sigma_\theta=2\alpha+n\pi/2$.</li>
+    <li><b>Special cases.</b> $\theta_1=0^\circ$, $\theta_2=45^\circ$: $\tfrac H4(\Delta\varepsilon^2-\gamma^2)$, \eqref{eq:045}. $\Sigma_\theta=0$: $-\tfrac H2\sin 2\Delta_\theta\,\gamma\,\Delta\varepsilon$.</li>
+    <li><b>Four-fold symmetry.</b> $\theta_2\to\theta_2+90^\circ$ flips both $\sin 2\Delta_\theta$ and the sign factor, so $\dfel$ is unchanged.</li>
+    <li><b>With simulation output.</b> The $xy$ component of a strain tensor is the tensor shear; insert $\gamma=2\varepsilon_{xy}$.</li>
+  </ul>
+
+  <!-- ===================================================== 9 -->
+  <h2 id="check"><span class="num">9.</span>Numerical check</h2>
+  <p>Every form above was compared with the energy computed by rotating the fourth-order fluorite stiffness tensor directly, $C_{ijkl}(\theta)=a\,a\,a\,a\,C(0^\circ)$ and $\fel(\theta_1)-\fel(\theta_2)$, for random strains (standard deviation $3\times10^{-3}$; $|\dfel|$ up to about 0.2 eV/nm³).</p>
+  <table>
+    <thead><tr><th>Quantity</th><th>Max. error (eV/nm³)</th></tr></thead>
+    <tbody>
+      <tr><td>Closed-form $C_{1111}$, $C_{1112}$, $C_{2212}$, $C_{1133}$ ($\theta=-90^\circ$ to $90^\circ$)</td><td>$1.4\times10^{-12}$</td></tr>
+      <tr><td>Expansion \eqref{eq:fexp} (20 000 random strains)</td><td>$3\times10^{-16}$</td></tr>
+      <tr><td>Difference (5.2) and β form \eqref{eq:beta}</td><td>$2.6\times10^{-16}$</td></tr>
+      <tr><td>All intermediate steps of Section 7</td><td>$\le 2\times10^{-15}$</td></tr>
+      <tr><td>Result (7.3), $H/4$ and $C^f$ forms</td><td>$2.5\times10^{-16}$</td></tr>
+      <tr><td>Two special cases</td><td>$2\times10^{-16}$</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================== appendices -->
+  <h2 id="appendix">Appendices</h2>
+  <h3 id="appA">A. Relation to Eshelby's driving force</h3>
+  <p>Applying Eshelby's energy–momentum tensor $P_{lj}=W\delta_{lj}-\sigma_{ij}u_{i,l}$ (Eshelby 1975, Eqs. 4.1–4.2) to the interface gives the exact driving force:</p>
+  \[
+    \begin{aligned}
+      \Delta f^{1\to2}&=[\![W]\!]-\mathbf t\cdot[\![\partial\mathbf u/\partial\nu]\!]\\
+      &=\tfrac12\,\varepsilon_1:(C_1-C_2):\varepsilon_2\\
+      &=\tfrac12\,\bar\varepsilon:(C_1-C_2):\bar\varepsilon\\
+      &\quad-\tfrac18\,\mathbf b:(C_1-C_2):\mathbf b .
+    \end{aligned}
+  \]
+  <ul>
+    <li>Replacing the strains on the two sides, $\varepsilon_1$ and $\varepsilon_2$, by one mean strain $\bar\varepsilon$ gives the definition of Section 4. Since $\mathbf b=\varepsilon_1-\varepsilon_2=O(H)$, the dropped term is $O(H^3)$.</li>
+    <li>Integrating the local driving force of the diffuse-interface model across the interface reproduces the Eshelby jump exactly for a flat interface in mechanical equilibrium with $c$ constant across it. The approximation enters only when the closed form is evaluated with a single strain.</li>
+  </ul>
+
+  <h3 id="appB">B. Equivalent forms</h3>
+  <p>Crystal-frame decomposition, an orientation-independent part plus a $\cos 4(\alpha-\theta)$ part:</p>
+  \[
+    \fel(\theta)=f_{\mathrm{iso}}+\frac H8\,\rho^2\cos 4(\alpha-\theta),
+  \]
+  \[
+    \begin{aligned}
+      f_{\mathrm{iso}}&=(C_{11}+C_{12})\,\varepsilon_m^2\\
+      &\quad+\tfrac18(C_{11}-C_{12}+2C_{44})\,\rho^2\\
+      &\quad+2C_{12}\,\varepsilon_m\varepsilon_{zz}+\tfrac12 C_{11}\,\varepsilon_{zz}^2 .
+    \end{aligned}
+  \]
+  <p>Complex one-line form: $\dfel=\frac H4\sin 2\Delta_\theta\,\mathrm{Re}\big[i\,\zeta^2e^{-i2\Sigma_\theta}\big]$. Since $i\,e^{-i2\Sigma_\theta}=e^{-i4\beta}$, this is the β form \eqref{eq:beta}.</p>
+
+  <h3>References</h3>
+  <ul class="note">
+    <li>B. Schönfelder, D. Wolf, S. R. Phillpot, M. Furtkamp, <i>Interface Sci.</i> 5 (1997) 245 (symmetric-boundary expression).</li>
+    <li>J. D. Eshelby, <i>J. Elasticity</i> 5 (1975) 321, Eqs. (4.1)–(4.2); <i>Phil. Trans. R. Soc. A</i> 244 (1951) 87, Eq. (32).</li>
+    <li>Sign convention: $H=C_{11}-C_{12}-2C_{44}$ here equals $-c_A$ of Schönfelder et&nbsp;al.; conventions differ between papers.</li>
+  </ul>
 </main>
 
 <footer>
-  NMML, Kyung Hee University · <a href="https://www.kunok.kr/">kunok.kr</a>
+  <div class="wrap">NMML, Kyung Hee University · <a href="https://www.kunok.kr/">kunok.kr</a> · Last updated 2026-10-31</div>
 </footer>
 
 </body>
