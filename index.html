@@ -3,18 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Derivation of Eq. (7) from Eq. (6) | MRS 2026 NM05.09</title>
-<meta name="description" content="Supplementary derivation for MRS 2026 Fall poster NM05.09: Eq. (7), the closed form of the elastic driving force, from its definition, Eq. (6).">
+<title>Derivations: Eq. (2) and why ΔG_int > 0 | MRS 2026 NM05.09</title>
+<meta name="description" content="Supplementary derivations for MRS 2026 Fall poster NM05.09: (A) Eq. (2), the closed form of the elastic driving force, from its definition, Eq. (D0); (B) why ΔG_int is positive in the interaction-energy (G_int) model: K(θ) decreases on 0–45°.">
 
 <!--
   ===== 수정 방법 =====
   - 글: <p> ... </p> 안에 씁니다. 인라인 수식은 $...$
   - 별행 수식: \[ ... \]. 번호는 수식 안 \tag가 아니라 <span class="tag">(D1)</span>로 붙입니다
-    (폰에서 번호가 식과 겹치지 않고, 자리가 없으면 식 아래로 내려가도록). 포스터와 같은 번호 (6), (7).
+    (폰에서 번호가 식과 겹치지 않고, 자리가 없으면 식 아래로 내려가도록). 포스터 번호는 결과식 (2)만 같습니다 (v6: 포스터는 다른 곳에서 인용하는 식만 번호를 달아, 정의식은 번호가 없고 여기서는 (D0)).
   - 수식 안의 부등호는 \lt , \gt 로 쓰세요 (HTML 태그로 오인됨). 본문 글자의 < > 는 &lt; &gt;
   - 긴 식은 넓은 화면용(class="only-wide")과 폰용(class="only-narrow") 두 벌이 있습니다. 고칠 때 둘 다 고치세요.
     그래도 화면보다 넓은 식은 페이지 끝의 스크립트가 글자 크기를 조금 줄여 맞춥니다(최대 25 %까지, 그 이상은 좌우 스크롤).
   - 그림: figs/ 폴더의 PNG. 바꿀 때 같은 이름으로 덮어쓰면 됩니다.
+  - 기호(v7): ε = ε^total − ε⁰ (탄성 변형률, 포스터와 같음), ε^total = 전 변형률, ε⁰ = 고유 변형률.
+  - 구성: A (정의 (D0) → 포스터 식 (2), 번호 D1–D17) / B (v8: K(θ)가 0–45°에서 감소 → ΔG_int > 0만 유도, 번호 K1–K6, 표 B1, 그림 B2; v9: part B 참고문헌은 서지사항만).
 -->
 <script>
   window.MathJax = {
@@ -70,6 +72,21 @@
   .fig2 { max-width: 520px; }
   .fig3 { max-width: 360px; }
   .fig4 { max-width: 420px; }
+  .figB2 { max-width: 520px; }
+  .toc { margin: 18px 0 0; font-size: 15px; }
+  .toc a, .refs a { color: var(--accent); }
+  .lead { color: var(--muted); font-size: 15px; }
+  ol.summary li, main ul li { margin: 4px 0; }
+  code { font-size: 14px; background: var(--accent-soft); padding: 1px 4px; border-radius: 4px; }
+  .tcap { margin: 18px 0 6px; font-size: 14px; color: var(--muted); }
+  .tcap b { color: var(--text); }
+  .tbl { overflow-x: auto; margin: 0 0 10px; }
+  .tbl table { border-collapse: collapse; font-size: 14px; white-space: nowrap; }
+  .tbl th, .tbl td { padding: 4px 9px; border-bottom: 1px solid var(--line); text-align: right; }
+  .tbl th { color: var(--accent); font-weight: 600; text-align: center; }
+  .tbl td:first-child { text-align: left; }
+  .refs { font-size: 14px; color: var(--muted); padding-left: 22px; }
+  .note { font-size: 13px; color: var(--muted); }
   /* displayed equation + its number: the number sits at the right, or drops below when there is no room */
   .eq { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; margin: 10px 0; }
   .eq > .m { flex: 1 1 auto; min-width: 0; }
@@ -104,7 +121,8 @@
 </header>
 
 <main>
-  <h1>Derivation of Eq. (7) from Eq. (6)</h1>
+  <p class="toc"><a href="#partA">A. Eq. (2) from its definition</a> · <a href="#partB">B. Why $\Delta G_\mathrm{int}\gt0$</a></p>
+  <h1 id="partA">A. Derivation of Eq. (2) from its definition</h1>
 
   <p><b>Notation.</b> Grain $i$ is rotated by $\theta_i$ about $[001]\parallel z$ (crystal $\to$ lab):</p>
   <div class="only-wide">
@@ -121,29 +139,29 @@
     \end{gathered}
   \]
   </div>
-  <p>$\mathbf e\equiv\boldsymbol\varepsilon-\boldsymbol\varepsilon^0$ with $\boldsymbol\varepsilon^0=\varepsilon^0(c)\,\mathbf I$, and $f_{\mathrm{el}}(\theta;\boldsymbol\varepsilon,c)=\tfrac12\,\mathbf e:\mathbf C(\theta):\mathbf e$.
-  $\Delta\varepsilon\equiv e_{xx}-e_{yy}=\varepsilon_{xx}-\varepsilon_{yy}$, $\gamma\equiv2e_{xy}=2\varepsilon_{xy}$, $H\equiv C_{11}-C_{12}-2C_{44}$, $\theta_\Delta\equiv\theta_2-\theta_1$, $\theta_\Sigma\equiv\theta_1+\theta_2$.</p>
+  <p>$\boldsymbol\varepsilon\equiv\boldsymbol\varepsilon^{\mathrm{total}}-\boldsymbol\varepsilon^0$ is the elastic strain, with the eigenstrain $\boldsymbol\varepsilon^0=\varepsilon^0(c)\,\mathbf I$ and the total strain $\boldsymbol\varepsilon^{\mathrm{total}}=\tfrac12\left(\nabla\mathbf u+\nabla\mathbf u^{\mathsf T}\right)$; $f_{\mathrm{el}}(\theta;\boldsymbol\varepsilon)=\tfrac12\,\boldsymbol\varepsilon:\mathbf C(\theta):\boldsymbol\varepsilon$.
+  $\Delta\varepsilon\equiv\varepsilon_{xx}-\varepsilon_{yy}=\varepsilon^{\mathrm{total}}_{xx}-\varepsilon^{\mathrm{total}}_{yy}$, $\gamma\equiv2\varepsilon_{xy}=2\varepsilon^{\mathrm{total}}_{xy}$ (the same with either strain, since $\boldsymbol\varepsilon^0$ is isotropic), $H\equiv C_{11}-C_{12}-2C_{44}$, $\theta_\Delta\equiv\theta_2-\theta_1$, $\theta_\Sigma\equiv\theta_1+\theta_2$.</p>
 
   <div class="eq">
     <div class="m only-wide">
   \[
-    \Delta f_{\mathrm{el}}^{1\to2}\equiv f_{\mathrm{el}}(\theta_1;\boldsymbol\varepsilon,c)-f_{\mathrm{el}}(\theta_2;\boldsymbol\varepsilon,c)=\tfrac12\,\mathbf e:\left[\mathbf C(\theta_1)-\mathbf C(\theta_2)\right]:\mathbf e
+    \Delta f_{\mathrm{el}}^{1\to2}\equiv f_{\mathrm{el}}(\theta_1;\boldsymbol\varepsilon)-f_{\mathrm{el}}(\theta_2;\boldsymbol\varepsilon)=\tfrac12\,\boldsymbol\varepsilon:\left[\mathbf C(\theta_1)-\mathbf C(\theta_2)\right]:\boldsymbol\varepsilon
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
-    \Delta f_{\mathrm{el}}^{1\to2}&\equiv f_{\mathrm{el}}(\theta_1;\boldsymbol\varepsilon,c)-f_{\mathrm{el}}(\theta_2;\boldsymbol\varepsilon,c)\\
-    &=\tfrac12\,\mathbf e:\left[\mathbf C(\theta_1)-\mathbf C(\theta_2)\right]:\mathbf e
+    \Delta f_{\mathrm{el}}^{1\to2}&\equiv f_{\mathrm{el}}(\theta_1;\boldsymbol\varepsilon)-f_{\mathrm{el}}(\theta_2;\boldsymbol\varepsilon)\\
+    &=\tfrac12\,\boldsymbol\varepsilon:\left[\mathbf C(\theta_1)-\mathbf C(\theta_2)\right]:\boldsymbol\varepsilon
     \end{aligned}
   \]
     </div>
-    <span class="tag">(6)</span>
+    <span class="tag">(D0)</span>
   </div>
 
   <figure class="fig1">
-    <img src="figs/fig1_same_point.png" width="1195" height="555" alt="Two squares: the same point r with the same c(r) and strain epsilon(r), inside grain 1 (theta 1, blue) and inside grain 2 (theta 2, red); Delta f_el(r) is f_el of the first minus f_el of the second.">
-    <figcaption><b>Fig. 1.</b> Eq. (6): the point $r$, with the same $\boldsymbol\varepsilon(r)$ and $c(r)$, taken as grain 1 ($\theta_1$) or as grain 2 ($\theta_2$).</figcaption>
+    <img src="figs/fig1_same_point.png" width="1195" height="555" alt="Two squares: the same point r with the same c(r) and elastic strain epsilon(r), inside grain 1 (theta 1, blue) and inside grain 2 (theta 2, red); Delta f_el(r) is f_el of the first minus f_el of the second.">
+    <figcaption><b>Fig. 1.</b> Eq. (D0): the point $r$, with the same $c(r)$ and $\boldsymbol\varepsilon^{\mathrm{total}}(r)$, hence the same $\boldsymbol\varepsilon(r)$, taken as grain 1 ($\theta_1$) or as grain 2 ($\theta_2$).</figcaption>
   </figure>
 
   <h2>1. Rotated stiffness</h2>
@@ -227,17 +245,17 @@
     <div class="m only-wide">
   \[
     \begin{aligned}
-    f_{\mathrm{el}}(\theta)={}&\tfrac12\Big[C_{1111}\left(e_{xx}^2+e_{yy}^2\right)+2C_{1122}\,e_{xx}e_{yy}+C_{1212}\,\gamma^2\Big]\\
-    &+C_{1112}\,\gamma\left(e_{xx}-e_{yy}\right)+\left(\theta\text{-independent terms}\right)
+    f_{\mathrm{el}}(\theta)={}&\tfrac12\Big[C_{1111}\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2C_{1122}\,\varepsilon_{xx}\varepsilon_{yy}+C_{1212}\,\gamma^2\Big]\\
+    &+C_{1112}\,\gamma\left(\varepsilon_{xx}-\varepsilon_{yy}\right)+\left(\theta\text{-independent terms}\right)
     \end{aligned}
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
-    f_{\mathrm{el}}(\theta)={}&\tfrac12\Big[C_{1111}\left(e_{xx}^2+e_{yy}^2\right)\\
-    &\quad+2C_{1122}\,e_{xx}e_{yy}+C_{1212}\,\gamma^2\Big]\\
-    &+C_{1112}\,\gamma\left(e_{xx}-e_{yy}\right)\\
+    f_{\mathrm{el}}(\theta)={}&\tfrac12\Big[C_{1111}\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)\\
+    &\quad+2C_{1122}\,\varepsilon_{xx}\varepsilon_{yy}+C_{1212}\,\gamma^2\Big]\\
+    &+C_{1112}\,\gamma\left(\varepsilon_{xx}-\varepsilon_{yy}\right)\\
     &+\left(\theta\text{-independent terms}\right)
     \end{aligned}
   \]
@@ -249,7 +267,7 @@
   <div class="only-wide">
   \[
     \begin{aligned}
-    &\tfrac12\cdot\tfrac H2\sin^22\theta\left[-\left(e_{xx}^2+e_{yy}^2\right)+2e_{xx}e_{yy}+\gamma^2\right]+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon\\
+    &\tfrac12\cdot\tfrac H2\sin^22\theta\left[-\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2\varepsilon_{xx}\varepsilon_{yy}+\gamma^2\right]+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon\\
     &\quad=\tfrac H4\sin^22\theta\left(\gamma^2-\Delta\varepsilon^2\right)+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon ,
     \end{aligned}
   \]
@@ -257,7 +275,7 @@
   <div class="only-narrow">
   \[
     \begin{aligned}
-    &\tfrac12\cdot\tfrac H2\sin^22\theta\left[-\left(e_{xx}^2+e_{yy}^2\right)+2e_{xx}e_{yy}+\gamma^2\right]\\
+    &\tfrac12\cdot\tfrac H2\sin^22\theta\left[-\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2\varepsilon_{xx}\varepsilon_{yy}+\gamma^2\right]\\
     &\quad+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon\\
     &=\tfrac H4\sin^22\theta\left(\gamma^2-\Delta\varepsilon^2\right)+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon ,
     \end{aligned}
@@ -522,12 +540,144 @@
     \end{aligned}}
   \]
     </div>
-    <span class="tag">(7)</span>
+    <span class="tag">(2)</span>
   </div>
+
+  <h1 id="partB">B. Why $\Delta G_\mathrm{int}^{1\to2}\gt0$: $K(\theta)$ decreases on 0–45°</h1>
+  <p class="lead">Interaction-energy ($G_\mathrm{int}$) model [1]. Each grain has a constant $K_i=K(\theta_i)$; the poster runs use $\theta_1=0$ and $\theta_2=10$–$45^\circ$. The local energy difference is poster Eq. (3):</p>
+
+  <div class="eq">
+    <div class="m only-wide">
+  \[
+    \Delta G_\mathrm{int}^{1\to2}=\big[K(\theta_1)-K(\theta_2)\big]\,4\eta_1^2\eta_2^2\,(c-c_0)^2
+  \]
+    </div>
+    <div class="m only-narrow">
+  \[
+    \begin{aligned}
+    \Delta G_\mathrm{int}^{1\to2}&=\big[K(\theta_1)-K(\theta_2)\big]\\
+    &\quad\times4\eta_1^2\eta_2^2\,(c-c_0)^2
+    \end{aligned}
+  \]
+    </div>
+    <span class="tag">(K1)</span>
+  </div>
+  <p>The factor $4\eta_1^2\eta_2^2(c-c_0)^2$ is never negative, and it is positive inside the GB once Gd has arrived. So the sign of (K1) is the sign of $K(\theta_1)-K(\theta_2)$, and it only remains to show that $K$ decreases as $|\theta|$ grows from 0 to 45°.</p>
+
+  <h2>B1. $K(\theta)$</h2>
+  <p>$K(\theta)=Y(\theta)\,\varepsilon_V^2$ with $\varepsilon_V=0.0487$. $Y$ is the coherency modulus of a Gd-rich layer parallel to the GB: the elastic energy per unit $(c-c_0)^2$ of a layer with Vegard eigenstrain $\varepsilon_V\delta_{ij}$, with the stiffness of a grain rotated by $\theta$, that is coherent with the matrix in the GB plane ($\varepsilon^{\mathrm{total}}_{yy}=\varepsilon^{\mathrm{total}}_{zz}=0$) and free along its normal ($\sigma_{xx}=\sigma_{xy}=0$). The stiffness rotated about [001], with $s\equiv\sin^22\theta$ and $H\equiv C_{11}^f-C_{12}^f-2C_{44}^f$ (as (D3) in part A), is</p>
+  <div class="eq">
+    <div class="m only-wide">
+  \[
+    \begin{aligned}
+    C_{1111}(\theta)&=C_{11}^f-\tfrac H2 s, & C_{1122}(\theta)&=C_{12}^f+\tfrac H2 s,\\
+    C_{1212}(\theta)&=C_{44}^f+\tfrac H2 s, & C_{1112}(\theta)&=\tfrac H4\sin 4\theta
+    \end{aligned}
+  \]
+    </div>
+    <div class="m only-narrow">
+  \[
+    \begin{aligned}
+    C_{1111}(\theta)&=C_{11}^f-\tfrac H2 s,\\
+    C_{1122}(\theta)&=C_{12}^f+\tfrac H2 s,\\
+    C_{1212}(\theta)&=C_{44}^f+\tfrac H2 s,\\
+    C_{1112}(\theta)&=\tfrac H4\sin 4\theta
+    \end{aligned}
+  \]
+    </div>
+    <span class="tag">(K2)</span>
+  </div>
+  <p>In the layer $\varepsilon_{yy}=\varepsilon_{zz}=-\varepsilon_V$ (elastic strain per unit $c-c_0$). The free normal, $\sigma_{xx}=\sigma_{xy}=0$, fixes $\varepsilon_{xx}$ and $\gamma=2\varepsilon_{xy}$:</p>
+  <div class="eq">
+    <div class="m only-wide">
+  \[
+    C_{1111}\,\varepsilon_{xx}+C_{1112}\,\gamma=(C_{1122}+C_{12}^f)\,\varepsilon_V,\qquad C_{1112}\,\varepsilon_{xx}+C_{1212}\,\gamma=-C_{1112}\,\varepsilon_V
+  \]
+    </div>
+    <div class="m only-narrow">
+  \[
+    \begin{aligned}
+    C_{1111}\,\varepsilon_{xx}+C_{1112}\,\gamma&=(C_{1122}+C_{12}^f)\,\varepsilon_V,\\
+    C_{1112}\,\varepsilon_{xx}+C_{1212}\,\gamma&=-C_{1112}\,\varepsilon_V
+    \end{aligned}
+  \]
+    </div>
+    <span class="tag">(K3)</span>
+  </div>
+  <p>The energy density is then $f=\tfrac12(\sigma_{yy}\varepsilon_{yy}+\sigma_{zz}\varepsilon_{zz})=Y\varepsilon_V^2$. With $C_{1112}^2=\tfrac{H^2}{4}s(1-s)$ and $C_{1111}C_{1212}-C_{1112}^2=C_{11}^fC_{44}^f+\tfrac H4(C_{11}^f+C_{12}^f)\,s$, $Y$ depends on $s$ only:</p>
+  <div class="eq">
+    <div class="m only-wide">
+  \[
+    Y(s)=\frac{C_{11}^f+2C_{12}^f}{2}\left[3-\frac{(C_{11}^f+2C_{12}^f)\big(C_{44}^f+\frac H2 s\big)}{C_{11}^fC_{44}^f+\frac H4\big(C_{11}^f+C_{12}^f\big)\,s}\right]
+  \]
+    </div>
+    <div class="m only-narrow">
+  \[
+    \begin{aligned}
+    Y(s)&=\frac{C_{11}^f+2C_{12}^f}{2}\\
+    &\quad\times\left[3-\frac{(C_{11}^f+2C_{12}^f)\big(C_{44}^f+\frac H2 s\big)}{C_{11}^fC_{44}^f+\frac H4\big(C_{11}^f+C_{12}^f\big)\,s}\right]
+    \end{aligned}
+  \]
+    </div>
+    <span class="tag">(K4)</span>
+  </div>
+  <p>At $s=0$ this is Cahn's $Y_{100}=(C_{11}+2C_{12})(C_{11}-C_{12})/C_{11}$ [2], and it equals <code>Yeff</code> in the input file.</p>
+
+  <h2>B2. $K$ decreases on 0–45°, so $\Delta G_\mathrm{int}^{1\to2}\gt0$</h2>
+  <p>Differentiating (K4),</p>
+  <div class="eq">
+    <div class="m">
+  \[
+    \frac{dY}{ds}=-\frac{(C_{11}^f+2C_{12}^f)^2\,H\,C_{44}^f\,(C_{11}^f-C_{12}^f)}{8\big[C_{11}^fC_{44}^f+\frac H4(C_{11}^f+C_{12}^f)\,s\big]^2}
+  \]
+    </div>
+    <span class="tag">(K5)</span>
+  </div>
+  <p>Every factor except $H$ is positive ($C_{44}^f\gt0$, $C_{11}^f\gt C_{12}^f$), so $\operatorname{sign}(dY/ds)=-\operatorname{sign}H$. For this fluorite [3], $H=3288.4-587.8-2\times390.6=1919.4$ eV/nm$^3\gt0$, so $Y$, and with it $K$, falls as $s$ grows. On $0\le|\theta|\le45^\circ$, $s=\sin^22\theta$ grows with $|\theta|$. Therefore</p>
+  <div class="eq">
+    <div class="m only-wide">
+  \[
+    |\theta_1|\lt|\theta_2|\le45^\circ\ \Longrightarrow\ K(\theta_1)\gt K(\theta_2)\ \Longrightarrow\ \Delta G_\mathrm{int}^{1\to2}\gt0
+  \]
+    </div>
+    <div class="m only-narrow">
+  \[
+    \begin{gathered}
+    |\theta_1|\lt|\theta_2|\le45^\circ\\
+    \Longrightarrow\ K(\theta_1)\gt K(\theta_2)\ \Longrightarrow\ \Delta G_\mathrm{int}^{1\to2}\gt0
+    \end{gathered}
+  \]
+    </div>
+    <span class="tag">(K6)</span>
+  </div>
+  <p>In the poster runs $\theta_1=0$, where $K$ is largest (8.695 eV/nm$^3$), so $\Delta G_\mathrm{int}^{1\to2}\gt0$ for every $\theta_2$ = 10–45°: grain 1 has the higher $G_\mathrm{int}$, and grain 2, the one with the larger tilt, grows (Table B1, Fig. B2).</p>
+  <ul>
+    <li>$K(-\theta)=K(\theta)$, so the sign of $\theta$ does not matter; $|\theta_1|=|\theta_2|$ gives $\Delta G_\mathrm{int}=0$.</li>
+    <li>$K$ is symmetric about 45°. In general the grain with the larger $\sin^22\theta$ has the smaller $K$.</li>
+    <li>For a cubic material with $H\lt0$ (Zener ratio $2C_{44}/(C_{11}-C_{12})\gt1$) the inequalities in (K6) reverse. Here the ratio is 0.29.</li>
+  </ul>
+
+  <p class="tcap"><b>Table B1.</b> $K(\theta)$ (eV/nm$^3$) = (K4) × $\varepsilon_V^2$.</p>
+  <div class="tbl"><table>
+    <tr><th>$\theta$</th><td>0°</td><td>5°</td><td>10°</td><td>15°</td><td>20°</td><td>25°</td><td>30°</td><td>45°</td></tr>
+    <tr><th>$K$</th><td>8.695</td><td>8.485</td><td>7.970</td><td>7.364</td><td>6.821</td><td>6.395</td><td>6.088</td><td>5.733</td></tr>
+  </table></div>
+
+  <figure class="figB2">
+    <img src="figs/figB2_K_theta.png" width="1020" height="720" alt="K(theta) from 0 to 90 degrees: it falls from 8.695 at 0 degrees to 5.733 eV per cubic nanometre at 45 degrees and rises back symmetrically; dots mark the tilts used in the runs.">
+    <figcaption><b>Fig. B2.</b> $K(\theta)$ from (K4): it decreases monotonically on 0–45° and is symmetric about 45°. Dots: tilts used in the runs.</figcaption>
+  </figure>
+
+  <h2>References for part B</h2>
+  <ol class="refs">
+    <li>D. Mukherjee et al., Comput. Mater. Sci. 184, 109914 (2020).</li>
+    <li>J. W. Cahn, Acta Metall. 10, 179 (1962).</li>
+    <li>G. Fadda et al., Phys. Rev. B 79, 214102 (2009).</li>
+  </ol>
 </main>
 
 <footer>
-  <div class="wrap">NMML, Kyung Hee University · <a href="https://www.kunok.kr/">kunok.kr</a> · Last updated 2026-11-07</div>
+  <div class="wrap">NMML, Kyung Hee University · <a href="https://www.kunok.kr/">kunok.kr</a> · Last updated 2026-11-09</div>
 </footer>
 
 <script>
