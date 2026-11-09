@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Derivations: Eq. (2) and why ΔG_int > 0 | MRS 2026 NM05.09</title>
-<meta name="description" content="Supplementary derivations for MRS 2026 Fall poster NM05.09: (A) Eq. (2), the closed form of the elastic driving force, from its definition, Eq. (D0); (B) why ΔG_int is positive in the interaction-energy (G_int) model: K(θ) decreases on 0–45°.">
+<meta name="description" content="Supplementary derivations for MRS 2026 Fall poster NM05.09: (A) Eq. (2), the closed form of the elastic driving force, from its definition; (B) why ΔG_int is positive in the interaction-energy (G_int) model: K(θ) decreases on 0–45°.">
 
 <script>
   window.MathJax = {
@@ -57,14 +57,12 @@
   figcaption { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 8px; text-align: left; font-style: italic; }
   figcaption b { font-style: normal; color: var(--text); }
   .fig1 { max-width: 600px; }
-  .fig2 { max-width: 520px; }
-  .fig3 { max-width: 360px; }
-  .fig4 { max-width: 420px; }
+  .figframe { max-width: 360px; }
+  .figcomplex { max-width: 420px; }
   .figB2 { max-width: 520px; }
   .toc { margin: 18px 0 0; font-size: 15px; }
   .toc a, .refs a { color: var(--accent); }
   .lead { color: var(--muted); font-size: 15px; }
-  ol.summary li, main ul li { margin: 4px 0; }
   code { font-size: 14px; background: var(--accent-soft); padding: 1px 4px; border-radius: 4px; }
   .tcap { margin: 18px 0 6px; font-size: 14px; color: var(--muted); }
   .tcap b { color: var(--text); }
@@ -74,7 +72,6 @@
   .tbl th { color: var(--accent); font-weight: 600; text-align: center; }
   .tbl td:first-child { text-align: left; }
   .refs { font-size: 14px; color: var(--muted); padding-left: 22px; }
-  .note { font-size: 13px; color: var(--muted); }
   /* displayed equation + its number: the number sits at the right, or drops below when there is no room */
   .eq { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; margin: 10px 0; }
   .eq > .m { flex: 1 1 auto; min-width: 0; }
@@ -112,35 +109,42 @@
   <p class="toc"><a href="#partA">A. Eq. (2) from its definition</a> · <a href="#partB">B. Why $\Delta G_\mathrm{int}\gt0$</a></p>
   <h1 id="partA">A. Derivation of Eq. (2) from its definition</h1>
 
-  <p><b>Notation.</b> Grain $i$ is rotated by $\theta_i$ about $[001]\parallel z$ (crystal $\to$ lab):</p>
+  <p><b>Notation.</b> Indices $i,j,k,l$ run over $x,y,z$ and repeated indices are summed. Grain $i$ has its cube axes turned by $\theta_i$ about $[001]\parallel z$ (counter-clockwise from the lab axes $x$, $y$), and its elastic energy density is</p>
   <div class="only-wide">
   \[
-    \mathbf a(\theta)=\begin{pmatrix}\cos\theta&-\sin\theta&0\\ \sin\theta&\cos\theta&0\\ 0&0&1\end{pmatrix},\qquad
-    C_{ijkl}(\theta)=a_{ip}\,a_{jq}\,a_{kr}\,a_{ls}\,C_{pqrs}(0),\qquad \mathbf a(0)=\mathbf I .
+    \begin{gathered}
+    f_{\mathrm{el}}(\theta;\boldsymbol\varepsilon)=\tfrac12\,C_{ijkl}(\theta)\,\varepsilon_{ij}\varepsilon_{kl},\qquad
+    \varepsilon_{ij}=\varepsilon^{\mathrm{total}}_{ij}-\varepsilon^0_{ij},\qquad
+    \varepsilon^{\mathrm{total}}_{ij}=\tfrac12\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i}\right),\\
+    \boldsymbol\varepsilon^0=\varepsilon^0(c)\,\mathbf I,\qquad
+    \mathbf I=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
+    \end{gathered}
   \]
   </div>
   <div class="only-narrow">
   \[
     \begin{gathered}
-    \mathbf a(\theta)=\begin{pmatrix}\cos\theta&-\sin\theta&0\\ \sin\theta&\cos\theta&0\\ 0&0&1\end{pmatrix},\\
-    C_{ijkl}(\theta)=a_{ip}\,a_{jq}\,a_{kr}\,a_{ls}\,C_{pqrs}(0),\qquad \mathbf a(0)=\mathbf I .
+    f_{\mathrm{el}}(\theta;\boldsymbol\varepsilon)=\tfrac12\,C_{ijkl}(\theta)\,\varepsilon_{ij}\varepsilon_{kl},\\
+    \varepsilon_{ij}=\varepsilon^{\mathrm{total}}_{ij}-\varepsilon^0_{ij},\qquad
+    \varepsilon^{\mathrm{total}}_{ij}=\tfrac12\left(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i}\right),\\
+    \boldsymbol\varepsilon^0=\varepsilon^0(c)\,\mathbf I,\qquad
+    \mathbf I=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix}.
     \end{gathered}
   \]
   </div>
-  <p>$\boldsymbol\varepsilon\equiv\boldsymbol\varepsilon^{\mathrm{total}}-\boldsymbol\varepsilon^0$ is the elastic strain, with the eigenstrain $\boldsymbol\varepsilon^0=\varepsilon^0(c)\,\mathbf I$ and the total strain $\boldsymbol\varepsilon^{\mathrm{total}}=\tfrac12\left(\nabla\mathbf u+\nabla\mathbf u^{\mathsf T}\right)$; $f_{\mathrm{el}}(\theta;\boldsymbol\varepsilon)=\tfrac12\,\boldsymbol\varepsilon:\mathbf C(\theta):\boldsymbol\varepsilon$.
-  $\Delta\varepsilon\equiv\varepsilon_{xx}-\varepsilon_{yy}=\varepsilon^{\mathrm{total}}_{xx}-\varepsilon^{\mathrm{total}}_{yy}$, $\gamma\equiv2\varepsilon_{xy}=2\varepsilon^{\mathrm{total}}_{xy}$ (the same with either strain, since $\boldsymbol\varepsilon^0$ is isotropic), $H\equiv C_{11}-C_{12}-2C_{44}$, $\theta_\Delta\equiv\theta_2-\theta_1$, $\theta_\Sigma\equiv\theta_1+\theta_2$.</p>
+  <p>Shorthands: $\Delta\varepsilon\equiv\varepsilon_{xx}-\varepsilon_{yy}$, $\gamma\equiv2\varepsilon_{xy}$ (the same with $\boldsymbol\varepsilon^{\mathrm{total}}$, since $\boldsymbol\varepsilon^0$ is isotropic), $H\equiv C_{11}-C_{12}-2C_{44}$, $\theta_\Delta\equiv\theta_2-\theta_1$, $\theta_\Sigma\equiv\theta_1+\theta_2$. The driving force compares the two grains at the same point, with the same $\boldsymbol\varepsilon$:</p>
 
   <div class="eq">
     <div class="m only-wide">
   \[
-    \Delta f_{\mathrm{el}}^{1\to2}\equiv f_{\mathrm{el}}(\theta_1;\boldsymbol\varepsilon)-f_{\mathrm{el}}(\theta_2;\boldsymbol\varepsilon)=\tfrac12\,\boldsymbol\varepsilon:\left[\mathbf C(\theta_1)-\mathbf C(\theta_2)\right]:\boldsymbol\varepsilon
+    \Delta f_{\mathrm{el}}^{1\to2}\equiv f_{\mathrm{el}}(\theta_1;\boldsymbol\varepsilon)-f_{\mathrm{el}}(\theta_2;\boldsymbol\varepsilon)=\tfrac12\left[C_{ijkl}(\theta_1)-C_{ijkl}(\theta_2)\right]\varepsilon_{ij}\varepsilon_{kl}
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
     \Delta f_{\mathrm{el}}^{1\to2}&\equiv f_{\mathrm{el}}(\theta_1;\boldsymbol\varepsilon)-f_{\mathrm{el}}(\theta_2;\boldsymbol\varepsilon)\\
-    &=\tfrac12\,\boldsymbol\varepsilon:\left[\mathbf C(\theta_1)-\mathbf C(\theta_2)\right]:\boldsymbol\varepsilon
+    &=\tfrac12\left[C_{ijkl}(\theta_1)-C_{ijkl}(\theta_2)\right]\varepsilon_{ij}\varepsilon_{kl}
     \end{aligned}
   \]
     </div>
@@ -152,182 +156,57 @@
     <figcaption><b>Fig. 1.</b> Eq. (D0): the point $r$, with the same $c(r)$ and $\boldsymbol\varepsilon^{\mathrm{total}}(r)$, hence the same $\boldsymbol\varepsilon(r)$, taken as grain 1 ($\theta_1$) or as grain 2 ($\theta_2$).</figcaption>
   </figure>
 
-  <h2>1. Rotated stiffness</h2>
+  <h2>1. Stiffness of a turned cubic grain</h2>
+  <p>A cubic crystal has three constants: at $\theta=0$, $C_{xxxx}=C_{yyyy}=C_{11}$, $C_{xxyy}=C_{12}$, $C_{xyxy}=C_{44}$, $C_{xxxy}=0$. Turning it about $[001]$ mixes $x$ and $y$ only, so every entry with a $z$ index keeps its $\theta=0$ value, and the in-plane entries change through $H$ alone:</p>
   <div class="eq">
     <div class="m only-wide">
   \[
     \begin{aligned}
-    C_{ijkl}(0)&=C_{12}\,\delta_{ij}\delta_{kl}+C_{44}\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right)+H\sum_{m=1}^{3}\delta_{im}\delta_{jm}\delta_{km}\delta_{lm},\\
-    C_{ijkl}(\theta)&=C_{12}\,\delta_{ij}\delta_{kl}+C_{44}\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right)+H\sum_{m=1}^{3}a_{im}\,a_{jm}\,a_{km}\,a_{lm}.
+    C_{xxxx}(\theta)&=C_{yyyy}(\theta)=C_{11}-\tfrac H2\sin^22\theta, &
+    C_{xxyy}(\theta)&=C_{12}+\tfrac H2\sin^22\theta,\\
+    C_{xyxy}(\theta)&=C_{44}+\tfrac H2\sin^22\theta, &
+    C_{xxxy}(\theta)&=-C_{yyxy}(\theta)=\tfrac H4\sin4\theta .
     \end{aligned}
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
-    C_{ijkl}(0)&=C_{12}\,\delta_{ij}\delta_{kl}+C_{44}\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right)\\
-    &\quad+H\sum_{m=1}^{3}\delta_{im}\delta_{jm}\delta_{km}\delta_{lm},\\
-    C_{ijkl}(\theta)&=C_{12}\,\delta_{ij}\delta_{kl}+C_{44}\left(\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk}\right)\\
-    &\quad+H\sum_{m=1}^{3}a_{im}\,a_{jm}\,a_{km}\,a_{lm}.
+    C_{xxxx}(\theta)&=C_{yyyy}(\theta)=C_{11}-\tfrac H2\sin^22\theta,\\
+    C_{xxyy}(\theta)&=C_{12}+\tfrac H2\sin^22\theta,\\
+    C_{xyxy}(\theta)&=C_{44}+\tfrac H2\sin^22\theta,\\
+    C_{xxxy}(\theta)&=-C_{yyxy}(\theta)=\tfrac H4\sin4\theta .
     \end{aligned}
   \]
     </div>
     <span class="tag">(D1)</span>
   </div>
 
+  <h2>2. Energy of one grain</h2>
+  <p>Expanding $\tfrac12 C_{ijkl}\varepsilon_{ij}\varepsilon_{kl}$ with (D1); all terms with a $z$ index, and the constants $C_{11}$, $C_{12}$, $C_{44}$, go into $F$, which does not depend on $\theta$. The $\sin^22\theta$ terms combine to $\tfrac H4\sin^22\theta\left[\gamma^2-(\varepsilon_{xx}-\varepsilon_{yy})^2\right]$:</p>
   <div class="eq">
     <div class="m only-wide">
   \[
     \begin{aligned}
-    &\sum_m a_{1m}^4=\cos^4\theta+\sin^4\theta=1-\tfrac12\sin^22\theta,\qquad
-    \sum_m a_{1m}^2a_{2m}^2=\tfrac12\sin^22\theta,\\
-    &\sum_m a_{1m}^3a_{2m}=-\sum_m a_{1m}a_{2m}^3=\tfrac14\sin4\theta
+    f_{\mathrm{el}}(\theta)&=\tfrac12\Big[C_{xxxx}\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2C_{xxyy}\,\varepsilon_{xx}\varepsilon_{yy}+C_{xyxy}\,\gamma^2\Big]+C_{xxxy}\,\gamma\,\Delta\varepsilon+\dots\\
+    &=F+\frac H4\Big[\gamma\Delta\varepsilon\,\sin4\theta-\left(\Delta\varepsilon^2-\gamma^2\right)\sin^22\theta\Big]
     \end{aligned}
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
-    &\sum_m a_{1m}^4=\cos^4\theta+\sin^4\theta=1-\tfrac12\sin^22\theta,\\
-    &\sum_m a_{1m}^2a_{2m}^2=\tfrac12\sin^22\theta,\\
-    &\sum_m a_{1m}^3a_{2m}=-\sum_m a_{1m}a_{2m}^3=\tfrac14\sin4\theta
+    f_{\mathrm{el}}(\theta)={}&\tfrac12\Big[C_{xxxx}\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2C_{xxyy}\,\varepsilon_{xx}\varepsilon_{yy}\\
+    &\quad+C_{xyxy}\,\gamma^2\Big]+C_{xxxy}\,\gamma\,\Delta\varepsilon+\dots\\
+    ={}&F+\frac H4\Big[\gamma\Delta\varepsilon\,\sin4\theta-\left(\Delta\varepsilon^2-\gamma^2\right)\sin^22\theta\Big]
     \end{aligned}
   \]
     </div>
     <span class="tag">(D2)</span>
   </div>
 
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \begin{aligned}
-    C_{1111}(\theta)&=C_{2222}(\theta)=C_{11}-\tfrac H2\sin^22\theta, &
-    C_{1122}(\theta)&=C_{12}+\tfrac H2\sin^22\theta,\\
-    C_{1212}(\theta)&=C_{44}+\tfrac H2\sin^22\theta, &
-    C_{1112}(\theta)&=-C_{2212}(\theta)=\tfrac H4\sin4\theta .
-    \end{aligned}
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    C_{1111}(\theta)&=C_{2222}(\theta)=C_{11}-\tfrac H2\sin^22\theta,\\
-    C_{1122}(\theta)&=C_{12}+\tfrac H2\sin^22\theta,\\
-    C_{1212}(\theta)&=C_{44}+\tfrac H2\sin^22\theta,\\
-    C_{1112}(\theta)&=-C_{2212}(\theta)=\tfrac H4\sin4\theta .
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D3)</span>
-  </div>
-
-  <p>Since $a_{3m}=\delta_{3m}$, every component with an index 3 is independent of $\theta$.</p>
-
-  <figure class="fig2">
-    <img src="figs/fig2_C_theta.png" width="1078" height="826" alt="Stiffness entries C1111, C1122, C1212 and C1112 versus rotation about [001] from 0 to 45 degrees, with constant black lines at C11, C12 and C44.">
-    <figcaption><b>Fig. 2.</b> Entries of $\mathbf C(\theta)$ from (D3) for $C_{11}=3288.4$, $C_{12}=587.8$, $C_{44}=390.6$ eV/nm$^3$; black lines: entries independent of $\theta$.</figcaption>
-  </figure>
-
-  <h2>2. Energy of one grain</h2>
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \begin{aligned}
-    f_{\mathrm{el}}(\theta)={}&\tfrac12\Big[C_{1111}\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2C_{1122}\,\varepsilon_{xx}\varepsilon_{yy}+C_{1212}\,\gamma^2\Big]\\
-    &+C_{1112}\,\gamma\left(\varepsilon_{xx}-\varepsilon_{yy}\right)+\left(\theta\text{-independent terms}\right)
-    \end{aligned}
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    f_{\mathrm{el}}(\theta)={}&\tfrac12\Big[C_{1111}\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)\\
-    &\quad+2C_{1122}\,\varepsilon_{xx}\varepsilon_{yy}+C_{1212}\,\gamma^2\Big]\\
-    &+C_{1112}\,\gamma\left(\varepsilon_{xx}-\varepsilon_{yy}\right)\\
-    &+\left(\theta\text{-independent terms}\right)
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D4)</span>
-  </div>
-
-  <p>Inserting (D3):</p>
-  <div class="only-wide">
-  \[
-    \begin{aligned}
-    &\tfrac12\cdot\tfrac H2\sin^22\theta\left[-\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2\varepsilon_{xx}\varepsilon_{yy}+\gamma^2\right]+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon\\
-    &\quad=\tfrac H4\sin^22\theta\left(\gamma^2-\Delta\varepsilon^2\right)+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon ,
-    \end{aligned}
-  \]
-  </div>
-  <div class="only-narrow">
-  \[
-    \begin{aligned}
-    &\tfrac12\cdot\tfrac H2\sin^22\theta\left[-\left(\varepsilon_{xx}^2+\varepsilon_{yy}^2\right)+2\varepsilon_{xx}\varepsilon_{yy}+\gamma^2\right]\\
-    &\quad+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon\\
-    &=\tfrac H4\sin^22\theta\left(\gamma^2-\Delta\varepsilon^2\right)+\tfrac H4\sin4\theta\,\gamma\Delta\varepsilon ,
-    \end{aligned}
-  \]
-  </div>
-
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    f_{\mathrm{el}}(\theta)=F+\frac H4\Big[\gamma\Delta\varepsilon\,\sin4\theta-\left(\Delta\varepsilon^2-\gamma^2\right)\sin^22\theta\Big],\qquad F\ \text{independent of}\ \theta .
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    f_{\mathrm{el}}(\theta)={}&F+\frac H4\Big[\gamma\Delta\varepsilon\,\sin4\theta\\
-    &-\left(\Delta\varepsilon^2-\gamma^2\right)\sin^22\theta\Big],\\
-    &F\ \text{independent of}\ \theta .
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D5)</span>
-  </div>
-
-  <h2>3. Difference</h2>
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \Delta f_{\mathrm{el}}^{1\to2}=\frac H4\Big[\gamma\Delta\varepsilon\left(\sin4\theta_1-\sin4\theta_2\right)-\left(\Delta\varepsilon^2-\gamma^2\right)\left(\sin^22\theta_1-\sin^22\theta_2\right)\Big]
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    \Delta f_{\mathrm{el}}^{1\to2}={}&\frac H4\Big[\gamma\Delta\varepsilon\left(\sin4\theta_1-\sin4\theta_2\right)\\
-    &-\left(\Delta\varepsilon^2-\gamma^2\right)\left(\sin^22\theta_1-\sin^22\theta_2\right)\Big]
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D6)</span>
-  </div>
-
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \begin{aligned}
-    \sin4\theta_1-\sin4\theta_2&=2\cos(2\theta_1+2\theta_2)\,\sin(2\theta_1-2\theta_2)=-2\cos2\theta_\Sigma\,\sin2\theta_\Delta,\\
-    \sin^22\theta_1-\sin^22\theta_2&=\sin(2\theta_1+2\theta_2)\,\sin(2\theta_1-2\theta_2)=-\sin2\theta_\Sigma\,\sin2\theta_\Delta
-    \end{aligned}
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    \sin4\theta_1-\sin4\theta_2&=2\cos(2\theta_1+2\theta_2)\,\sin(2\theta_1-2\theta_2)\\
-    &=-2\cos2\theta_\Sigma\,\sin2\theta_\Delta,\\
-    \sin^22\theta_1-\sin^22\theta_2&=\sin(2\theta_1+2\theta_2)\,\sin(2\theta_1-2\theta_2)\\
-    &=-\sin2\theta_\Sigma\,\sin2\theta_\Delta
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D7)</span>
-  </div>
-
+  <h2>3. Difference of the two grains</h2>
+  <p>$F$ cancels in (D0). With $\sin4\theta_1-\sin4\theta_2=-2\cos2\theta_\Sigma\sin2\theta_\Delta$ and $\sin^22\theta_1-\sin^22\theta_2=-\sin2\theta_\Sigma\sin2\theta_\Delta$,</p>
   <div class="eq">
     <div class="m only-wide">
   \[
@@ -342,178 +221,50 @@
     \end{aligned}
   \]
     </div>
-    <span class="tag">(D8)</span>
+    <span class="tag">(D3)</span>
   </div>
 
-  <h2>4. $\beta$-rotated frame</h2>
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \beta\equiv\frac{\theta_\Sigma}{2}-\frac{\pi}{8}
-    \quad\Longrightarrow\quad
-    4\beta=2\theta_\Sigma-\frac{\pi}{2},\qquad \sin2\theta_\Sigma=\cos4\beta,\qquad -\cos2\theta_\Sigma=\sin4\beta
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    &\beta\equiv\frac{\theta_\Sigma}{2}-\frac{\pi}{8}
-    \quad\Longrightarrow\quad
-    4\beta=2\theta_\Sigma-\frac{\pi}{2},\\
-    &\sin2\theta_\Sigma=\cos4\beta,\qquad -\cos2\theta_\Sigma=\sin4\beta
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D9)</span>
-  </div>
-
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \Delta\varepsilon'\equiv\Delta\varepsilon\cos2\beta+\gamma\sin2\beta,\qquad
-    \gamma'\equiv\gamma\cos2\beta-\Delta\varepsilon\sin2\beta
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    \Delta\varepsilon'&\equiv\Delta\varepsilon\cos2\beta+\gamma\sin2\beta,\\
-    \gamma'&\equiv\gamma\cos2\beta-\Delta\varepsilon\sin2\beta
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D10)</span>
-  </div>
-
-  <figure class="fig3">
-    <img src="figs/fig3_beta_frame.png" width="809" height="731" alt="Lab axes x and y (dashed), the [100] axes of grains 1 and 2 (blue arrows), their bisector (dotted), and the rotated axes x-prime and y-prime (red) at angle beta, pi/8 below the bisector.">
-    <figcaption><b>Fig. 3.</b> The $\beta$-rotated frame (D9): blue, [100] axes of grains 1 and 2; dotted, their bisector at $\theta_\Sigma/2$; red, axes $x'$, $y'$ at $\beta=\theta_\Sigma/2-\pi/8$ (drawn for $\theta_1=50^\circ$, $\theta_2=70^\circ$).</figcaption>
-  </figure>
-
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \begin{aligned}
-    \Delta\varepsilon'^2-\gamma'^2&=\left(\Delta\varepsilon^2-\gamma^2\right)\left(\cos^22\beta-\sin^22\beta\right)+4\gamma\Delta\varepsilon\sin2\beta\cos2\beta\\
-    &=\left(\Delta\varepsilon^2-\gamma^2\right)\cos4\beta+2\gamma\Delta\varepsilon\sin4\beta
-    =\left(\Delta\varepsilon^2-\gamma^2\right)\sin2\theta_\Sigma-2\gamma\Delta\varepsilon\cos2\theta_\Sigma
-    \end{aligned}
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    \Delta\varepsilon'^2-\gamma'^2&=\left(\Delta\varepsilon^2-\gamma^2\right)\left(\cos^22\beta-\sin^22\beta\right)\\
-    &\quad+4\gamma\Delta\varepsilon\sin2\beta\cos2\beta\\
-    &=\left(\Delta\varepsilon^2-\gamma^2\right)\cos4\beta+2\gamma\Delta\varepsilon\sin4\beta\\
-    &=\left(\Delta\varepsilon^2-\gamma^2\right)\sin2\theta_\Sigma-2\gamma\Delta\varepsilon\cos2\theta_\Sigma
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D11)</span>
-  </div>
-
+  <h2>4. Turned frame</h2>
+  <p>Turn the axes by $\beta\equiv\theta_\Sigma/2-\pi/8$, that is, $\pi/8$ below the bisector of the two [100] axes (Fig. 2). Then $\sin2\theta_\Sigma=\cos4\beta$ and $-\cos2\theta_\Sigma=\sin4\beta$. In the turned frame the strains are $\Delta\varepsilon'=\Delta\varepsilon\cos2\beta+\gamma\sin2\beta$ and $\gamma'=\gamma\cos2\beta-\Delta\varepsilon\sin2\beta,$ and the bracket in (D3) becomes $\left(\Delta\varepsilon^2-\gamma^2\right)\cos4\beta+2\gamma\Delta\varepsilon\sin4\beta=\Delta\varepsilon'^2-\gamma'^2$:</p>
   <div class="eq">
     <div class="m">
   \[
     \Delta f_{\mathrm{el}}^{1\to2}=\frac H4\sin2\theta_\Delta\left(\Delta\varepsilon'^2-\gamma'^2\right)
   \]
     </div>
-    <span class="tag">(D12)</span>
+    <span class="tag">(D4)</span>
   </div>
 
-  <h2>5. Complex form</h2>
-  <div class="eq">
-    <div class="m">
-  \[
-    \zeta\equiv\Delta\varepsilon+i\gamma=\rho\,e^{i2\alpha},\qquad \rho^2=\Delta\varepsilon^2+\gamma^2
-  \]
-    </div>
-    <span class="tag">(D13)</span>
-  </div>
-
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \zeta\,e^{-i2\beta}=\left(\Delta\varepsilon+i\gamma\right)\left(\cos2\beta-i\sin2\beta\right)=\Delta\varepsilon'+i\gamma'=\rho\,e^{i\psi},\qquad \psi\equiv2\alpha-2\beta
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    \zeta\,e^{-i2\beta}&=\left(\Delta\varepsilon+i\gamma\right)\left(\cos2\beta-i\sin2\beta\right)\\
-    &=\Delta\varepsilon'+i\gamma'=\rho\,e^{i\psi},\qquad \psi\equiv2\alpha-2\beta
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D14)</span>
-  </div>
-
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    \begin{aligned}
-    &\Delta\varepsilon'=\rho\cos\psi,\qquad \gamma'=\rho\sin\psi,\\
-    &\Delta\varepsilon'^2-\gamma'^2=\rho^2\left(\cos^2\psi-\sin^2\psi\right)=\rho^2\cos2\psi=\left(\Delta\varepsilon^2+\gamma^2\right)\cos\left(4\alpha-4\beta\right)
-    \end{aligned}
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    \Delta\varepsilon'&=\rho\cos\psi,\qquad \gamma'=\rho\sin\psi,\\
-    \Delta\varepsilon'^2-\gamma'^2&=\rho^2\left(\cos^2\psi-\sin^2\psi\right)=\rho^2\cos2\psi\\
-    &=\left(\Delta\varepsilon^2+\gamma^2\right)\cos\left(4\alpha-4\beta\right)
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D15)</span>
-  </div>
-
-  <figure class="fig4">
-    <img src="figs/fig4_complex_plane.png" width="1070" height="848" alt="Complex plane: zeta at angle 2 alpha (blue) is turned by minus 2 beta to zeta-prime at angle psi (red); its projections on the real and imaginary axes are Delta epsilon-prime and gamma-prime.">
-    <figcaption><b>Fig. 4.</b> (D13)–(D15): turning the axes by $\beta$ moves $\zeta=\rho e^{i2\alpha}$ to $\zeta'=\rho e^{i\psi}$, $\psi=2\alpha-2\beta$; $\Delta\varepsilon'$ and $\gamma'$ are its projections.</figcaption>
+  <figure class="figframe">
+    <img src="figs/fig3_beta_frame.png" width="809" height="731" alt="Lab axes x and y (dashed), the [100] axes of grains 1 and 2 (blue arrows), their bisector (dotted), and the turned axes x-prime and y-prime (red) at angle beta, pi/8 below the bisector.">
+    <figcaption><b>Fig. 2.</b> The turned frame of (D4): blue, [100] axes of grains 1 and 2; dotted, their bisector at $\theta_\Sigma/2$; red, axes $x'$, $y'$ at $\beta=\theta_\Sigma/2-\pi/8$ (drawn for $\theta_1=50^\circ$, $\theta_2=70^\circ$).</figcaption>
   </figure>
 
-  <h2>6. Substituting $\beta$ and $\alpha$</h2>
+  <h2>5. Complex form</h2>
+  <p>Write the strain as $\zeta\equiv\Delta\varepsilon+i\gamma=\rho\,e^{i2\alpha}$, with $\rho^2=\Delta\varepsilon^2+\gamma^2$ and $2\alpha=\arctan(\gamma/\Delta\varepsilon)$. Turning the axes by $\beta$ turns $\zeta$ by $-2\beta$: $\zeta'\equiv\Delta\varepsilon'+i\gamma'=\zeta\,e^{-i2\beta}=\rho\,e^{i\psi}$, $\psi=2\alpha-2\beta$ (Fig. 3). With $4\beta=2\theta_\Sigma-\pi/2$,</p>
   <div class="eq">
     <div class="m only-wide">
   \[
-    \cos\left(4\alpha-4\beta\right)=\cos\!\left(4\alpha-2\theta_\Sigma+\frac{\pi}{2}\right)=-\sin\left(4\alpha-2\theta_\Sigma\right)=\sin\left(2\theta_\Sigma-4\alpha\right)
+    \Delta\varepsilon'^2-\gamma'^2=\mathrm{Re}\,\zeta'^2=\rho^2\cos2\psi=\rho^2\cos\left(4\alpha-4\beta\right)=\rho^2\sin2\left(\theta_\Sigma-2\alpha\right)
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
-    \cos\left(4\alpha-4\beta\right)&=\cos\!\left(4\alpha-2\theta_\Sigma+\frac{\pi}{2}\right)\\
-    &=-\sin\left(4\alpha-2\theta_\Sigma\right)=\sin\left(2\theta_\Sigma-4\alpha\right)
+    \Delta\varepsilon'^2-\gamma'^2&=\mathrm{Re}\,\zeta'^2=\rho^2\cos2\psi\\
+    &=\rho^2\cos\left(4\alpha-4\beta\right)=\rho^2\sin2\left(\theta_\Sigma-2\alpha\right)
     \end{aligned}
   \]
     </div>
-    <span class="tag">(D16)</span>
+    <span class="tag">(D5)</span>
   </div>
 
-  <div class="eq">
-    <div class="m only-wide">
-  \[
-    2\alpha=\arctan\frac{\gamma}{\Delta\varepsilon}+k\pi\ \ (k\in\mathbb Z,\ \Delta\varepsilon\neq0)
-    \quad\Longrightarrow\quad
-    \sin\left(2\theta_\Sigma-4\alpha\right)=\sin2\!\left(\theta_\Sigma-\arctan\frac{\gamma}{\Delta\varepsilon}\right)
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    &2\alpha=\arctan\frac{\gamma}{\Delta\varepsilon}+k\pi\ \ (k\in\mathbb Z,\ \Delta\varepsilon\neq0)\\
-    &\Longrightarrow\quad
-    \sin\left(2\theta_\Sigma-4\alpha\right)=\sin2\!\left(\theta_\Sigma-\arctan\frac{\gamma}{\Delta\varepsilon}\right)
-    \end{aligned}
-  \]
-    </div>
-    <span class="tag">(D17)</span>
-  </div>
+  <figure class="figcomplex">
+    <img src="figs/fig4_complex_plane.png" width="1070" height="848" alt="Complex plane: zeta at angle 2 alpha (blue) is turned by minus 2 beta to zeta-prime at angle psi (red); its projections on the real and imaginary axes are Delta epsilon-prime and gamma-prime.">
+    <figcaption><b>Fig. 3.</b> (D5): turning the axes by $\beta$ turns $\zeta=\rho e^{i2\alpha}$ by $-2\beta$ to $\zeta'=\rho e^{i\psi}$; $\Delta\varepsilon'$ and $\gamma'$ are its projections.</figcaption>
+  </figure>
 
-  <p>(D15)–(D17) in (D12):</p>
+  <p>The arctangent fixes $2\alpha$ up to a multiple of $\pi$, which leaves (D5) unchanged. (D5) in (D4):</p>
   <div class="eq final">
     <div class="m only-wide">
   \[
@@ -532,8 +283,7 @@
   </div>
 
   <h1 id="partB">B. Why $\Delta G_\mathrm{int}^{1\to2}\gt0$: $K(\theta)$ decreases on 0–45°</h1>
-  <p class="lead">Interaction-energy ($G_\mathrm{int}$) model [1]. Each grain has a constant $K_i=K(\theta_i)$; the poster runs use $\theta_1=0$ and $\theta_2=10$–$45^\circ$. The local energy difference is poster Eq. (3):</p>
-
+  <p class="lead">Interaction-energy ($G_\mathrm{int}$) model [1]: each grain has a constant $K_i=K(\theta_i)$. The local energy difference is poster Eq. (3):</p>
   <div class="eq">
     <div class="m only-wide">
   \[
@@ -550,110 +300,82 @@
     </div>
     <span class="tag">(K1)</span>
   </div>
-  <p>The factor $4\eta_1^2\eta_2^2(c-c_0)^2$ is never negative, and it is positive inside the GB once Gd has arrived. So the sign of (K1) is the sign of $K(\theta_1)-K(\theta_2)$, and it only remains to show that $K$ decreases as $|\theta|$ grows from 0 to 45°.</p>
+  <p>The second factor is never negative, so the sign of (K1) is the sign of $K(\theta_1)-K(\theta_2)$: it remains to show that $K$ decreases from 0 to 45°.</p>
 
-  <h2>B1. $K(\theta)$</h2>
-  <p>$K(\theta)=Y(\theta)\,\varepsilon_V^2$ with $\varepsilon_V=0.0487$. $Y$ is the coherency modulus of a Gd-rich layer parallel to the GB: the elastic energy per unit $(c-c_0)^2$ of a layer with Vegard eigenstrain $\varepsilon_V\delta_{ij}$, with the stiffness of a grain rotated by $\theta$, that is coherent with the matrix in the GB plane ($\varepsilon^{\mathrm{total}}_{yy}=\varepsilon^{\mathrm{total}}_{zz}=0$) and free along its normal ($\sigma_{xx}=\sigma_{xy}=0$). The stiffness rotated about [001], with $s\equiv\sin^22\theta$ and $H\equiv C_{11}^f-C_{12}^f-2C_{44}^f$ (as (D3) in part A), is</p>
+  <h2>B1. $K(\theta)=Y(\theta)\,\varepsilon_V^2$</h2>
+  <p>$Y$ is the coherency modulus [2] of a thin Gd-rich layer parallel to the GB (normal $x$). Per unit $(c-c_0)$ the layer carries the Vegard eigenstrain $\varepsilon_V\mathbf I$, is coherent with the grain in the GB plane ($\varepsilon^{\mathrm{total}}_{yy}=\varepsilon^{\mathrm{total}}_{zz}=0$, so $\varepsilon_{yy}=\varepsilon_{zz}=-\varepsilon_V$) and is free along its normal ($\sigma_{xx}=\sigma_{xy}=0$). With the stiffness (D1) of a grain turned by $\theta$, the two stress conditions fix $\varepsilon_{xx}$ and $\gamma$:</p>
   <div class="eq">
     <div class="m only-wide">
   \[
-    \begin{aligned}
-    C_{1111}(\theta)&=C_{11}^f-\tfrac H2 s, & C_{1122}(\theta)&=C_{12}^f+\tfrac H2 s,\\
-    C_{1212}(\theta)&=C_{44}^f+\tfrac H2 s, & C_{1112}(\theta)&=\tfrac H4\sin 4\theta
-    \end{aligned}
+    C_{xxxx}\,\varepsilon_{xx}+C_{xxxy}\,\gamma=(C_{xxyy}+C_{12})\,\varepsilon_V,\qquad C_{xxxy}\,\varepsilon_{xx}+C_{xyxy}\,\gamma=-C_{xxxy}\,\varepsilon_V
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
-    C_{1111}(\theta)&=C_{11}^f-\tfrac H2 s,\\
-    C_{1122}(\theta)&=C_{12}^f+\tfrac H2 s,\\
-    C_{1212}(\theta)&=C_{44}^f+\tfrac H2 s,\\
-    C_{1112}(\theta)&=\tfrac H4\sin 4\theta
+    C_{xxxx}\,\varepsilon_{xx}+C_{xxxy}\,\gamma&=(C_{xxyy}+C_{12})\,\varepsilon_V,\\
+    C_{xxxy}\,\varepsilon_{xx}+C_{xyxy}\,\gamma&=-C_{xxxy}\,\varepsilon_V
     \end{aligned}
   \]
     </div>
     <span class="tag">(K2)</span>
   </div>
-  <p>In the layer $\varepsilon_{yy}=\varepsilon_{zz}=-\varepsilon_V$ (elastic strain per unit $c-c_0$). The free normal, $\sigma_{xx}=\sigma_{xy}=0$, fixes $\varepsilon_{xx}$ and $\gamma=2\varepsilon_{xy}$:</p>
+  <p>and the energy $\tfrac12 C_{ijkl}\varepsilon_{ij}\varepsilon_{kl}=\tfrac12(\sigma_{yy}\varepsilon_{yy}+\sigma_{zz}\varepsilon_{zz})=Y\varepsilon_V^2$ depends on $\theta$ only through $s\equiv\sin^22\theta$:</p>
   <div class="eq">
     <div class="m only-wide">
   \[
-    C_{1111}\,\varepsilon_{xx}+C_{1112}\,\gamma=(C_{1122}+C_{12}^f)\,\varepsilon_V,\qquad C_{1112}\,\varepsilon_{xx}+C_{1212}\,\gamma=-C_{1112}\,\varepsilon_V
+    Y(s)=\frac{C_{11}+2C_{12}}{2}\left[3-\frac{(C_{11}+2C_{12})\big(C_{44}+\frac H2 s\big)}{C_{11}C_{44}+\frac H4\big(C_{11}+C_{12}\big)\,s}\right]
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{aligned}
-    C_{1111}\,\varepsilon_{xx}+C_{1112}\,\gamma&=(C_{1122}+C_{12}^f)\,\varepsilon_V,\\
-    C_{1112}\,\varepsilon_{xx}+C_{1212}\,\gamma&=-C_{1112}\,\varepsilon_V
+    Y(s)&=\frac{C_{11}+2C_{12}}{2}\\
+    &\quad\times\left[3-\frac{(C_{11}+2C_{12})\big(C_{44}+\frac H2 s\big)}{C_{11}C_{44}+\frac H4\big(C_{11}+C_{12}\big)\,s}\right]
     \end{aligned}
   \]
     </div>
     <span class="tag">(K3)</span>
   </div>
-  <p>The energy density is then $f=\tfrac12(\sigma_{yy}\varepsilon_{yy}+\sigma_{zz}\varepsilon_{zz})=Y\varepsilon_V^2$. With $C_{1112}^2=\tfrac{H^2}{4}s(1-s)$ and $C_{1111}C_{1212}-C_{1112}^2=C_{11}^fC_{44}^f+\tfrac H4(C_{11}^f+C_{12}^f)\,s$, $Y$ depends on $s$ only:</p>
+  <p>At $s=0$ this is Cahn's $Y_{100}=(C_{11}+2C_{12})(C_{11}-C_{12})/C_{11}$ [2].</p>
+
+  <h2>B2. $K$ decreases on 0–45°, so $\Delta G_\mathrm{int}^{1\to2}\gt0$</h2>
   <div class="eq">
-    <div class="m only-wide">
+    <div class="m">
   \[
-    Y(s)=\frac{C_{11}^f+2C_{12}^f}{2}\left[3-\frac{(C_{11}^f+2C_{12}^f)\big(C_{44}^f+\frac H2 s\big)}{C_{11}^fC_{44}^f+\frac H4\big(C_{11}^f+C_{12}^f\big)\,s}\right]
-  \]
-    </div>
-    <div class="m only-narrow">
-  \[
-    \begin{aligned}
-    Y(s)&=\frac{C_{11}^f+2C_{12}^f}{2}\\
-    &\quad\times\left[3-\frac{(C_{11}^f+2C_{12}^f)\big(C_{44}^f+\frac H2 s\big)}{C_{11}^fC_{44}^f+\frac H4\big(C_{11}^f+C_{12}^f\big)\,s}\right]
-    \end{aligned}
+    \frac{dY}{ds}=-\frac{(C_{11}+2C_{12})^2\,H\,C_{44}\,(C_{11}-C_{12})}{8\big[C_{11}C_{44}+\frac H4(C_{11}+C_{12})\,s\big]^2}
   \]
     </div>
     <span class="tag">(K4)</span>
   </div>
-  <p>At $s=0$ this is Cahn's $Y_{100}=(C_{11}+2C_{12})(C_{11}-C_{12})/C_{11}$ [2], and it equals <code>Yeff</code> in the input file.</p>
-
-  <h2>B2. $K$ decreases on 0–45°, so $\Delta G_\mathrm{int}^{1\to2}\gt0$</h2>
-  <p>Differentiating (K4),</p>
-  <div class="eq">
-    <div class="m">
-  \[
-    \frac{dY}{ds}=-\frac{(C_{11}^f+2C_{12}^f)^2\,H\,C_{44}^f\,(C_{11}^f-C_{12}^f)}{8\big[C_{11}^fC_{44}^f+\frac H4(C_{11}^f+C_{12}^f)\,s\big]^2}
-  \]
-    </div>
-    <span class="tag">(K5)</span>
-  </div>
-  <p>Every factor except $H$ is positive ($C_{44}^f\gt0$, $C_{11}^f\gt C_{12}^f$), so $\operatorname{sign}(dY/ds)=-\operatorname{sign}H$. For this fluorite [3], $H=3288.4-587.8-2\times390.6=1919.4$ eV/nm$^3\gt0$, so $Y$, and with it $K$, falls as $s$ grows. On $0\le|\theta|\le45^\circ$, $s=\sin^22\theta$ grows with $|\theta|$. Therefore</p>
+  <p>Every factor except $H$ is positive, so $\operatorname{sign}(dY/ds)=-\operatorname{sign}H$. For this fluorite [3], $H=3288.4-587.8-2\times390.6=1919.4$ eV/nm$^3\gt0$: $Y$, and with it $K$, falls as $s$ grows, and $s=\sin^22\theta$ grows with $|\theta|$ on 0–45°. Therefore</p>
   <div class="eq">
     <div class="m only-wide">
   \[
-    |\theta_1|\lt|\theta_2|\le45^\circ\ \Longrightarrow\ K(\theta_1)\gt K(\theta_2)\ \Longrightarrow\ \Delta G_\mathrm{int}^{1\to2}\gt0
+    |\theta_1|\lt|\theta_2|\le45^\circ\ \Longrightarrow\ K(\theta_1)\gt K(\theta_2)\ \Longrightarrow\ \Delta G_\mathrm{int}^{1\to2}\gt0 .
   \]
     </div>
     <div class="m only-narrow">
   \[
     \begin{gathered}
     |\theta_1|\lt|\theta_2|\le45^\circ\\
-    \Longrightarrow\ K(\theta_1)\gt K(\theta_2)\ \Longrightarrow\ \Delta G_\mathrm{int}^{1\to2}\gt0
+    \Longrightarrow\ K(\theta_1)\gt K(\theta_2)\ \Longrightarrow\ \Delta G_\mathrm{int}^{1\to2}\gt0 .
     \end{gathered}
   \]
     </div>
-    <span class="tag">(K6)</span>
+    <span class="tag">(K5)</span>
   </div>
-  <p>In the poster runs $\theta_1=0$, where $K$ is largest (8.695 eV/nm$^3$), so $\Delta G_\mathrm{int}^{1\to2}\gt0$ for every $\theta_2$ = 10–45°: grain 1 has the higher $G_\mathrm{int}$, and grain 2, the one with the larger tilt, grows (Table B1, Fig. B2).</p>
-  <ul>
-    <li>$K(-\theta)=K(\theta)$, so the sign of $\theta$ does not matter; $|\theta_1|=|\theta_2|$ gives $\Delta G_\mathrm{int}=0$.</li>
-    <li>$K$ is symmetric about 45°. In general the grain with the larger $\sin^22\theta$ has the smaller $K$.</li>
-    <li>For a cubic material with $H\lt0$ (Zener ratio $2C_{44}/(C_{11}-C_{12})\gt1$) the inequalities in (K6) reverse. Here the ratio is 0.29.</li>
-  </ul>
+  <p>In the poster runs $\theta_1=0$ and $\theta_2=10$–$45^\circ$, so grain 2, the one with the larger tilt, grows (Table B1, Fig. B2). For a cubic material with $H\lt0$ the inequality reverses.</p>
 
-  <p class="tcap"><b>Table B1.</b> $K(\theta)$ (eV/nm$^3$) = (K4) × $\varepsilon_V^2$.</p>
+  <p class="tcap"><b>Table B1.</b> $K(\theta)$ (eV/nm$^3$) = (K3) × $\varepsilon_V^2$, $\varepsilon_V=0.0487$.</p>
   <div class="tbl"><table>
     <tr><th>$\theta$</th><td>0°</td><td>5°</td><td>10°</td><td>15°</td><td>20°</td><td>25°</td><td>30°</td><td>45°</td></tr>
     <tr><th>$K$</th><td>8.695</td><td>8.485</td><td>7.970</td><td>7.364</td><td>6.821</td><td>6.395</td><td>6.088</td><td>5.733</td></tr>
   </table></div>
 
   <figure class="figB2">
-    <img src="figs/figB2_K_theta.png" width="1020" height="720" alt="K(theta) from 0 to 90 degrees: it falls from 8.695 at 0 degrees to 5.733 eV per cubic nanometre at 45 degrees and rises back symmetrically; dots mark the tilts used in the runs.">
-    <figcaption><b>Fig. B2.</b> $K(\theta)$ from (K4): it decreases monotonically on 0–45° and is symmetric about 45°. Dots: tilts used in the runs.</figcaption>
+    <img src="figs/figB2_K_theta.png" width="1020" height="720" alt="K(theta) from 0 to 45 degrees: it falls monotonically from 8.695 at 0 degrees to 5.733 eV per cubic nanometre at 45 degrees; dots mark the tilts used in the runs.">
+    <figcaption><b>Fig. B2.</b> $K(\theta)$ from (K3) on 0–45°. Dots: tilts used in the runs.</figcaption>
   </figure>
 
   <h2>References for part B</h2>
